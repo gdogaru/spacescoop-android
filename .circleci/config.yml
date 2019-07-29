@@ -5,11 +5,11 @@ jobs:
     docker:
       - image: circleci/android:api-28
 
-    working_directory: ~/AntennaPod
+    working_directory: ~/code
 
     environment:
-      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx1536m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError"'
-      _JAVA_OPTIONS: "-Xms256m -Xmx1280m"
+      _JAVA_OPTIONS: "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Xmx2000m -XX:ParallelGCThreads=1 -XX:ConcGCThreads=1 -Djava.util.concurrent.ForkJoinPool.common.parallelism=1 -Dkotlin.compiler.execution.strategy=in-process"
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx1000m"'
 
     steps:
       - checkout

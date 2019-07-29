@@ -34,7 +34,7 @@ jobs:
 
       - run:
           command: |
-            ./gradlew lint test bundle publishRelease -Pkotlin.incremental=false --no-daemon --stacktrace  --max-workers 1
+            ./gradlew lint test bundle publishProdRelease -Pkotlin.incremental=false --no-daemon --stacktrace  --max-workers 1
           no_output_timeout: 60000
 
       - store_artifacts:

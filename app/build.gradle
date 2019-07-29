@@ -3,7 +3,7 @@ plugins {
     id 'io.fabric'
     id 'com.google.firebase.firebase-perf'
     id 'androidx.navigation.safeargs'
-    id 'com.github.triplet.play' version '2.0.0'
+    id 'com.github.triplet.play' version "2.3.0"
 }
 
 android {

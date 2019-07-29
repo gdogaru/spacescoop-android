@@ -3,7 +3,7 @@ plugins {
     id 'io.fabric'
     id 'com.google.firebase.firebase-perf'
     id 'androidx.navigation.safeargs'
-    id 'com.github.triplet.play' version "2.0.0"
+    id 'com.github.triplet.play' version "2.3.0"
 }
 
 android {
@@ -169,7 +169,7 @@ dependencies {
 // Configuration for com.github.triplet.play deployment
 play {
     track = 'alpha' // or internal or beta...
-    serviceAccountCredentials = file(System.getenv('PRIVATE_KEY') ?: '../certificate/private_key.json')
+    serviceAccountCredentials = file(System.getenv('PRIVATE_KEY') ?: '../certificate/private-key.json')
     defaultToAppBundles = true // Use App Bundle instead of APK
     resolutionStrategy = "ignore"
     //If the deployment fails due to an API error, don't fail the CI Build

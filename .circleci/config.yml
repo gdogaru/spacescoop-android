@@ -22,8 +22,8 @@ jobs:
             chmod +x gradlew
             echo $ENCODED_KEYSTORE | openssl base64 -d -A -out ${HOME}/keystore.jks
             echo 'export KEYSTORE=${HOME}/keystore.jks' >> $BASH_ENV
-            echo $DEPLOYMENT_PRIVATE_KEY >> ${HOME}/deployment_private_key.json
-            echo 'export PRIVATE_KEY=${HOME}/deployment_private_key.json' >> $BASH_ENV
+            echo $DEPLOYMENT_PRIVATE_KEY >> ${HOME}/deployment-private-key.json
+            echo 'export PRIVATE_KEY=${HOME}/deployment-private-key.json' >> $BASH_ENV
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies

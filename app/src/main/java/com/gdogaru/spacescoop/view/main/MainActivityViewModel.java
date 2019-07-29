@@ -7,7 +7,6 @@ import com.gdogaru.spacescoop.api.ApiResponse;
 import com.gdogaru.spacescoop.api.SpacescoopClient;
 import com.gdogaru.spacescoop.api.model.Language;
 import com.gdogaru.spacescoop.controllers.AppSettingsController;
-import com.gdogaru.spacescoop.db.NewsDao;
 import com.gdogaru.spacescoop.work.WorkerController;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class MainActivityViewModel extends ViewModel {
     private final AppSettingsController settingsController;
 
     @Inject
-    public MainActivityViewModel(SpacescoopClient client, WorkerController workerController, NewsDao newsDao, AppSettingsController settingsController) {
+    public MainActivityViewModel(SpacescoopClient client, WorkerController workerController, AppSettingsController settingsController) {
         this.client = client;
         this.workerController = workerController;
         this.settingsController = settingsController;

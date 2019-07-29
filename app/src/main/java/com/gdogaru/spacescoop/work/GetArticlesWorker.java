@@ -21,7 +21,6 @@ import com.rometools.rome.feed.synd.SyndEnclosure;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.squareup.inject.assisted.Assisted;
 import com.squareup.inject.assisted.AssistedInject;
-import com.squareup.otto.Bus;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -38,8 +37,6 @@ public class GetArticlesWorker extends Worker {
     public static final String PARAM_UPDATE_NEW = "UPDATE_NEW";
     public static final String PARAM_NOTIFY = "NOTIFY";
 
-
-    private final Bus bus;
     private final AppSettingsController settingsController;
     private final ImageDownloader imageDownloader;
     private final NewsDao newsDao;
@@ -56,9 +53,8 @@ public class GetArticlesWorker extends Worker {
     @AssistedInject
     public GetArticlesWorker(@Assisted @NonNull Context appContext,
                              @Assisted @NonNull WorkerParameters workerParams,
-                             Bus bus, AppSettingsController settingsController, ImageDownloader imageDownloader, NewsDao newsDao, AnalyticsHelper analyticsHelper, SpacescoopClient spacescoopClient) {
+                             AppSettingsController settingsController, ImageDownloader imageDownloader, NewsDao newsDao, AnalyticsHelper analyticsHelper, SpacescoopClient spacescoopClient) {
         super(appContext, workerParams);
-        this.bus = bus;
         this.settingsController = settingsController;
         this.imageDownloader = imageDownloader;
         this.newsDao = newsDao;

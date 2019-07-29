@@ -34,7 +34,6 @@ import static com.gdogaru.spacescoop.view.main.scoops.ScoopsFragment.GRID_COLUMN
 
 @Singleton
 public class CachingDownloader {
-    private static final int SOCKET_OPERATION_TIMEOUT = 10000;
     private static final int MAX_RESOLUTION = 700 * 700;
     private final Context appContext;
     private DiskAdapter diskAdapter;
@@ -194,16 +193,10 @@ public class CachingDownloader {
             return null;
         }
         URL url = new URL(strurl);
-//        URLConnection urlConnection = url.openConnection();
-//        urlConnection.setReadTimeout(SOCKET_OPERATION_TIMEOUT);
-//        InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
-        try {
-            BitmapFactory.Options opts = getBitmapOptions();
-            byte[] data = IOUtils.toByteArray(url);
-            return BitmapFactory.decodeByteArray(data, 0, data.length, opts);
-        } finally {
-//            IOUtils.closeQuietly(inputStream);
-        }
+        BitmapFactory.Options opts = getBitmapOptions();
+        byte[] data = IOUtils.toByteArray(url);
+        return BitmapFactory.decodeByteArray(data, 0, data.length, opts);
+
     }
 
     @SneakyThrows

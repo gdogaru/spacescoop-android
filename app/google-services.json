@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "20284360957",
+    "firebase_url": "https://spacescoop.firebaseio.com",
+    "project_id": "spacescoop",
+    "storage_bucket": "spacescoop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20284360957:android:21b2a63cd4f07090",
+        "android_client_info": {
+          "package_name": "com.gdogaru.spacescoop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20284360957-jt2mj40n8tpuk6v5834st6jmpd992va3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gdogaru.spacescoop",
+            "certificate_hash": "6dda5eb9d7a67e012a5a4b6f7f2c06316fc40407"
+          }
+        },
+        {
+          "client_id": "20284360957-nls03pvvag562hfnk751jge9ctrqf3rc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCel2I7dRnpHgZDG5eCMZ69Wvib_SOEnDA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20284360957-nls03pvvag562hfnk751jge9ctrqf3rc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

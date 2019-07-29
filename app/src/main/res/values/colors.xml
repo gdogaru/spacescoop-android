@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_color">#ffffff</color>
+    <color name="primary_color_dark">#000000</color>
+    <color name="primary_color_accent">#ff052136</color>
+    <color name="text_color_primary">#ff000000</color>
+    <color name="drawer_color">#fffcfcfc</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_25">#45000000</color>
+    <color name="titleColor">#171717</color>
+    <color name="titleBack">#fad405</color>
+    <color name="titleDivider">#aafbe422</color>
+    <color name="background">#f8f8f8</color>
+    <color name="list_separator">#ffdedede</color>
+    <color name="list_text">#040404</color>
+    <color name="list_text_pressed">#2b2b2b</color>
+    <color name="list_back_pressed">#fff541</color>
+    <color name="list_back">#ffffffff</color>
+    <color name="dateColor">#ff474747</color>
+    <color name="list_item_read">#fff541</color>
+
+    <color name="action_button">#ff474747</color>
+
+    <color name="red_menu_button">#B71220</color>
+    <color name="red_menu_button_pressed">#fff6264b</color>
+    <color name="blue_menu_button">#1D76B3</color>
+    <color name="blue_menu_button_pressed">#ff49b2f9</color>
+    <color name="yellow_menu_button">#E48824</color>
+    <color name="yellow_menu_button_pressed">#ffffb148</color>
+    <color name="green_menu_button">#158C23</color>
+    <color name="green_menu_button_pressed">#ff46ee55</color>
+    <color name="list_item_back">#ffffff</color>
+    <color name="list_item_back_pressed">#ffa8d7ff</color>
+
+    <color name="language_select_text">#ff232323</color>
+    <color name="language_select_text_pressed">#ff555555</color>
+    <color name="green">#00ff00</color>
+
+    <color name="text_dark">#202124</color>
+    <color name="gray">#ddd</color>
+    <color name="scoop_blue">#0090c7</color>
+    <color name="scoop_orange">#f2a139</color>
+</resources>

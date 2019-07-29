@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/thanks_for_using" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/please_rate" />
+
+    <!--rate button-->
+    <Button
+        android:id="@+id/rateButton"
+        style="@style/rateButton"
+        android:layout_marginTop="15dp"
+        android:text="@string/rate" />
+
+    <!--never button-->
+    <Button
+        android:id="@+id/neverButton"
+        style="@style/rateButton"
+        android:layout_marginTop="5dp"
+        android:text="@string/never" />
+
+    <!--later button-->
+    <Button
+        android:id="@+id/laterButton"
+        style="@style/rateButton"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/later" />
+
+
+</LinearLayout>

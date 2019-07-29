@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="menuButton">
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">0.33</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:contentDescription">@string/content_description</item>
+    </style>
+
+    <style name="mainMenuButton">
+        <item name="android:layout_width">35dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:contentDescription">@string/content_description</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_text">16sp</dimen>
+    <dimen name="item_title_text">20sp</dimen>
+    <dimen name="date_text">10sp</dimen>
+    <dimen name="preview_text">12sp</dimen>
+    <dimen name="activity_horizontal_margin">10dp</dimen>
+
+    <dimen name="margin_half">8dp</dimen>
+    <dimen name="margin">16dp</dimen>
+
+</resources>

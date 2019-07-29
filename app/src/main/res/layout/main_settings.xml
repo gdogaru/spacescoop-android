@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/wifi_only_container"
+        style="@style/SettingsLine"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            style="@style/SettingsLabel"
+            android:duplicateParentState="true"
+            android:text="@string/check_for_updates_only_on_wifi" />
+
+        <Switch
+            android:id="@+id/wifi_only"
+            style="@style/SettingsSwitch"
+            android:duplicateParentState="true" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/ListDivider" />
+
+    <LinearLayout
+        android:id="@+id/notification_enabled_container"
+        style="@style/SettingsLine">
+
+        <TextView
+            style="@style/SettingsLabel"
+            android:duplicateParentState="true"
+            android:text="@string/enable_notifications" />
+
+        <Switch
+            android:id="@+id/notification_enabled"
+            style="@style/SettingsSwitch"
+            android:checked="true"
+            android:duplicateParentState="true" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/ListDivider" />
+
+</LinearLayout>

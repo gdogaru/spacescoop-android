@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/scoops"
+        android:icon="@drawable/menu_articles_button_b"
+        android:orderInCategory="1"
+        android:title="@string/scoops"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/menu_search_button_b"
+        android:orderInCategory="1"
+        android:title="@string/search"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/credits"
+        android:icon="@drawable/menu_credits_button_b"
+        android:orderInCategory="1"
+        android:title="@string/credits"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/language"
+        android:icon="@drawable/ic_flag_white_36dp_b"
+        android:orderInCategory="1"
+        android:title="@string/language"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/menu_settings"
+        android:orderInCategory="1"
+        android:title="@string/settings"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/rate"
+        android:icon="@drawable/ic_star_rate_white_48dp_b"
+        android:orderInCategory="1"
+        android:title="@string/rate"
+        app:showAsAction="always" />
+
+</menu>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="google_analitycs_tracker_id">UA-57723891-3</string>
+
+    <string name="app_name">Space Scoop</string>
+    <string name="content_description">image</string>
+
+    <!--article layout-->
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="no_news">No article</string>
+
+    <!--refreshable list view -->
+    <string name="ptr_pull_to_refresh">Pull to refresh</string>
+    <string name="ptr_release_to_refresh">Release to refresh</string>
+    <string name="ptr_refreshing">Refreshing</string>
+    <string name="ptr_last_updated">Updated: %1$s</string>
+
+    <!--title_bar layout-->
+    <string name="title_text">Space Scoop</string>
+
+    <!--main layout-->
+    <string name="no_events">No events</string>
+
+
+    <!--ad_loading_footer layout-->
+    <string name="loading">Loading …</string>
+
+    <!--menu layout-->
+    <string name="select_language">Select language</string>
+    <string name="ok">OK</string>
+    <string name="processing">Processing…</string>
+    <string name="cancel">Cancel</string>
+    <string name="unawe_title">UNAWE | SPACE SCOOP</string>
+    <string name="credits">Credits</string>
+    <string name="search...">Search…</string>
+    <string name="search_results">Add criteria</string>
+    <string name="item">x</string>
+    <string name="search_results2">Search results:</string>
+    <string name="information">Information</string>
+    <string name="search">Search</string>
+    <string name="can_not_take_language">Sorry, could not fetch available languages.</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string name="thanks_for_using">Thank you for using the app!</string>
+    <string name="please_rate">Please repay us with a good rating.</string>
+    <string name="rate">Rate</string>
+    <string name="later">Latter</string>
+    <string name="never">Never</string>
+    <string name="scoops">Scoops</string>
+    <string name="language">Language</string>
+    <string name="grid_view">Grid</string>
+    <string name="list_view">List</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, cibo epicurei dissentiunt ius an. Mea ne veritus euripidis vulputate, nemore disputationi quo ex. Sea augue movet at. Usu te consul necessitatibus. Invenire quaestio et sit, sed an prima doctus scripta, esse ubique offendit in mei. Vero sanctus his no. Eum regione officiis interpretaris ne, cum erat civibus disputationi eu, ea pro iudico officiis.
+
+Id mei wisi errem, in eruditi atomorum eam. Odio efficiendi ne nec. Novum mucius eam ea, tota tamquam inermis ius ea. Vero possit graecis te mel, harum voluptatum ex vis, dictas apeirian ne nam. Sint indoctum pro ea, veritus detracto vituperatoribus duo eu.
+
+Est ei diam inermis, mea veniam laudem facilisis ad, te pri facilisi partiendo consectetuer. Mel iudico consulatu in, ut iisque aeterno suavitate vix. No erant nusquam vix, wisi maluisset ut nec. Dicunt appareat delicata te vel.
+
+Posse molestiae consequuntur in sed, has id audire albucius salutandi. An nec vidisse probatus referrentur, velit persecuti maiestatis eum et. Wisi habemus signiferumque pri te. Ei sed accusam adipisci inciderint, eu vix fugit alterum deserunt, vel at novum ancillae atomorum.
+
+Quo at hinc dolores voluptatibus, pri suas petentium cu. Ad mel commodo erroribus, ex euismod delicata cum, vis dolore altera aeterno eu. Altera timeam expetenda an quo, his atqui mollis ex. Libris epicurei salutatus id qui, nam ut audire sensibus scriptorem. Ne his congue voluptatum. Ne graece postulant gloriatur mel. Sit epicuri patrioque at, vim eros ridens an.</string>
+    <string name="new_items_found">We have new articles for you.</string>
+    <string name="unawe_url">http://www.unawe.org/kids/</string>
+    <string name="loading_feed">We are preparing your feed…</string>
+    <string name="changing_language">Changing language...</string>
+    <string name="article_image_transition">article-image-transition</string>
+    <string name="settings">Settings</string>
+    <string name="notification_channel">Spacescoop notifications</string>
+    <string name="change">Change</string>
+    <string name="check_for_updates_only_on_wifi">Check for updates only on wifi</string>
+    <string name="enable_notifications">Enable notifications</string>
+    <string name="notification_channel_description">SpaceScoop Notifications</string>
+    <string name="share">Share</string>
+</resources>

@@ -3,7 +3,6 @@ plugins {
     id 'io.fabric'
     id 'com.google.firebase.firebase-perf'
     id 'androidx.navigation.safeargs'
-    id 'findbugs'
     id 'com.github.triplet.play' version '2.0.0'
 }
 
@@ -13,8 +12,8 @@ android {
 
     defaultConfig {
         applicationId "com.gdogaru.spacescoop"
-        versionCode 14
-        versionName "2.2"
+        versionCode 18
+        versionName "3.0.0"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
 
@@ -23,10 +22,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('../certificate/build-keystore.jks')
-            storePassword "spacescoop"
-            keyAlias "spacescoop"
-            keyPassword "spacescoop"
+            storeFile file(System.getenv('KEYSTORE') ?: '../certificate/build-keystore.jks')
+            storePassword System.getenv("KEYSTORE_PASSWORD") ?: "spacescoop"
+            keyAlias System.getenv("KEY_ALIAS") ?: "spacescoop"
+            keyPassword System.getenv("KEY_PASSWORD") ?: "spacescoop"
         }
     }
 
@@ -40,7 +39,7 @@ android {
             shrinkResources true
             minifyEnabled true
             signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../tools/proguard-shrink-only.pro'
         }
     }
 

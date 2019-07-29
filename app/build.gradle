@@ -3,7 +3,7 @@ plugins {
     id 'io.fabric'
     id 'com.google.firebase.firebase-perf'
     id 'androidx.navigation.safeargs'
-    id 'com.github.triplet.play' version "2.3.0"
+    id 'com.github.triplet.play' version "2.0.0"
 }
 
 android {
@@ -12,8 +12,8 @@ android {
 
     defaultConfig {
         applicationId "com.gdogaru.spacescoop"
-        versionCode 18
-        versionName "3.0.0"
+        versionCode 1
+        versionName "0.0.0"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
 
@@ -92,6 +92,15 @@ android {
 
     dexOptions {
 //        javaMaxHeapSize "2g"
+    }
+
+    applicationVariants.all { variant ->
+        if (variant.buildType.name == "release") {
+            variant.outputs.each { output ->
+                output.versionCodeOverride = androidAppVersionCode
+                output.versionNameOverride = androidAppVersionName
+            }
+        }
     }
 }
 

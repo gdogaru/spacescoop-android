@@ -4,7 +4,7 @@ buildscript {
     addRepos(repositories)
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0-rc01'
+        classpath 'com.android.tools.build:gradle:3.4.2'
         classpath 'com.google.gms:google-services:4.3.0'
         classpath "com.android.tools.build.jetifier:jetifier-processor:$versions.jetifier"
         classpath 'com.google.firebase:firebase-plugins:1.2.0'

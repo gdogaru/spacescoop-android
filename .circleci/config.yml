@@ -46,7 +46,7 @@ jobs:
           branches:
             only:
               - master
-              - develop
+          #              - develop
           no_output_timeout: 60000
           command: |
             ./gradlew publishProdRelease -Pkotlin.incremental=false --no-daemon --stacktrace  --max-workers 1

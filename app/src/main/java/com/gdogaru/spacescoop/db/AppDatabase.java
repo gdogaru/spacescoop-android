@@ -32,9 +32,9 @@ import com.gdogaru.spacescoop.db.model.Article;
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
-    public abstract NewsDao newsDao();
-
     private static volatile AppDatabase INSTANCE;
+
+    public abstract NewsDao newsDao();
 
     public static AppDatabase getInstance(@NonNull final Context context) {
         if (INSTANCE == null) {

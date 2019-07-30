@@ -116,10 +116,8 @@ public class DiskImageDownloader implements ImageDownloader {
             if (bitmap == null) {
                 bitmap = cachingDownloader.retrieveBitmap(photoToLoad.getImage(), photoToLoad.getSize());
             }
-            if (bitmap != null) {
-                if (photoToLoad.isMemoryCacheable()) {
-                    memoryCache.put(photoToLoad.getImage(), bitmap);
-                }
+            if (bitmap != null && photoToLoad.isMemoryCacheable()) {
+                memoryCache.put(photoToLoad.getImage(), bitmap);
             }
             if (imageViewReused(photoToLoad)) {
                 return;

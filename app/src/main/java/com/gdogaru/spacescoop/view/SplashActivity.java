@@ -105,30 +105,26 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_ID_MULTIPLE_PERMISSIONS: {
-                List<String> notGranted = new ArrayList<>(permissionsNeeded);
-                for (int i = 0; i < permissions.length; i++) {
-                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        notGranted.remove(permissions[i]);
-                    }
+        if (requestCode == REQUEST_ID_MULTIPLE_PERMISSIONS) {
+            List<String> notGranted = new ArrayList<>(permissionsNeeded);
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    notGranted.remove(permissions[i]);
                 }
-                if (notGranted.size() > 0) {
-                    if (getPermissionsNeeded().size() > 0) {
-                        showDialogOK("The app cannot function without these permissions.",
-                                (dialog, which) -> {
-                                    switch (which) {
-                                        case DialogInterface.BUTTON_POSITIVE:
-                                            checkAndRequestPermissions();
-                                            break;
-                                    }
-                                });
-                    }
-                    allPermissionsGranted = false;
-                } else {
-                    allPermissionsGranted = true;
-                    openMainActivity();
+            }
+            if (notGranted.size() > 0) {
+                if (getPermissionsNeeded().size() > 0) {
+                    showDialogOK("The app cannot function without these permissions.",
+                            (dialog, which) -> {
+                                if (which == DialogInterface.BUTTON_POSITIVE) {
+                                    checkAndRequestPermissions();
+                                }
+                            });
                 }
+                allPermissionsGranted = false;
+            } else {
+                allPermissionsGranted = true;
+                openMainActivity();
             }
         }
     }

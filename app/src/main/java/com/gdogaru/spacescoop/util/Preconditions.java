@@ -32,6 +32,7 @@ import java.util.Locale;
  *
  * @hide
  */
+@SuppressWarnings("PMD.AvoidThrowingCertainExceptionTypes")
 public class Preconditions {
     public static void checkArgument(boolean expression) {
         if (!expression) {

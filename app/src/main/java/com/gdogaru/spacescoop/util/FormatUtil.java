@@ -30,15 +30,12 @@ public class FormatUtil {
     public static final String UI_DATE_FORMAT = "dd MMMM yyyy";
     public static final String XML_DATE_FORMAT = "EEE, d MMM yyyy HH:mm:ss z";
 
-    public static String formatForUI(Date date, String lang) {
+    public static String formatForUI(Date date, @Nullable String lang) {
         if (date == null) {
             return "";
         }
-        if (lang == null) {
-            lang = "us";
-        }
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat(UI_DATE_FORMAT, new Locale(lang));
+            SimpleDateFormat dateFormat = new SimpleDateFormat(UI_DATE_FORMAT, new Locale(lang == null ? "us" : lang));
             return dateFormat.format(date);
         } catch (Exception e) {
             return new SimpleDateFormat(UI_DATE_FORMAT, Locale.US).format(date);

@@ -23,12 +23,12 @@ import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
-import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
+
+import timber.log.Timber;
 
 /**
  * @author Gabriel Dogaru (gdogaru@gmail.com)
@@ -36,22 +36,21 @@ import androidx.appcompat.widget.AppCompatImageView;
 public class TouchImageView extends AppCompatImageView {
 
     // We can be in one of these 3 states
-    static final int NONE = 0;
-    static final int DRAG = 1;
-    static final int ZOOM = 2;
-    static final int CLICK = 3;
-    protected float origWidth, origHeight;
-    Matrix matrix;
-    int mode = NONE;
-    // Remember some things for zooming
-    PointF last = new PointF();
-    PointF start = new PointF();
-    float minScale = 1f;
-    float maxScale = 3f;
-    float[] m;
-    int viewWidth, viewHeight;
-    float saveScale = 1f;
-    int oldMeasuredWidth, oldMeasuredHeight;
+    private static final int NONE = 0;
+    private static final int DRAG = 1;
+    private static final int ZOOM = 2;
+    private static final int CLICK = 3;
+    private float origWidth, origHeight;
+    private Matrix matrix;
+    private int mode = NONE;
+    private PointF last = new PointF();
+    private PointF start = new PointF();
+    private float minScale = 1f;
+    private float maxScale = 3f;
+    private float[] m;
+    private int viewWidth, viewHeight;
+    private float saveScale = 1f;
+    private int oldMeasuredWidth, oldMeasuredHeight;
 
 
     ScaleGestureDetector mScaleDetector;
@@ -85,59 +84,54 @@ public class TouchImageView extends AppCompatImageView {
         setImageMatrix(matrix);
         setScaleType(ScaleType.MATRIX);
 
-        setOnTouchListener(new OnTouchListener() {
+        setOnTouchListener((v, event) -> {
+            mScaleDetector.onTouchEvent(event);
+            PointF curr = new PointF(event.getX(), event.getY());
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mScaleDetector.onTouchEvent(event);
-                PointF curr = new PointF(event.getX(), event.getY());
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    last.set(curr);
+                    start.set(last);
+                    mode = DRAG;
+                    stopInterceptEvent();
+                    break;
 
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        last.set(curr);
-                        start.set(last);
-                        mode = DRAG;
-                        stopInterceptEvent();
-                        break;
+                case MotionEvent.ACTION_MOVE:
+                    if (mode == DRAG) {
+                        float deltaX = curr.x - last.x;
+                        float deltaY = curr.y - last.y;
+                        float fixTransX = getFixDragTrans(deltaX, viewWidth, origWidth * saveScale);
+                        float fixTransY = getFixDragTrans(deltaY, viewHeight, origHeight * saveScale);
+                        matrix.postTranslate(fixTransX, fixTransY);
+                        fixTrans();
+                        last.set(curr.x, curr.y);
 
-                    case MotionEvent.ACTION_MOVE:
-                        if (mode == DRAG) {
-                            float deltaX = curr.x - last.x;
-                            float deltaY = curr.y - last.y;
-                            float fixTransX = getFixDragTrans(deltaX, viewWidth, origWidth * saveScale);
-                            float fixTransY = getFixDragTrans(deltaY, viewHeight, origHeight * saveScale);
-                            matrix.postTranslate(fixTransX, fixTransY);
-                            fixTrans();
-                            last.set(curr.x, curr.y);
+                        float transX = m[Matrix.MTRANS_X];
 
-                            float transX = m[Matrix.MTRANS_X];
+                        if ((int) (getFixTrans(transX, viewWidth, origWidth * saveScale) + fixTransX) == 0)
+                            startInterceptEvent();
+                        else
+                            stopInterceptEvent();
+                    }
+                    break;
 
-                            if ((int) (getFixTrans(transX, viewWidth, origWidth * saveScale) + fixTransX) == 0)
-                                startInterceptEvent();
-                            else
-                                stopInterceptEvent();
-                        }
-                        break;
+                case MotionEvent.ACTION_UP:
+                    mode = NONE;
+                    int xDiff = (int) Math.abs(curr.x - start.x);
+                    int yDiff = (int) Math.abs(curr.y - start.y);
+                    if (xDiff < CLICK && yDiff < CLICK)
+                        performClick();
+                    startInterceptEvent();
+                    break;
 
-                    case MotionEvent.ACTION_UP:
-                        mode = NONE;
-                        int xDiff = (int) Math.abs(curr.x - start.x);
-                        int yDiff = (int) Math.abs(curr.y - start.y);
-                        if (xDiff < CLICK && yDiff < CLICK)
-                            performClick();
-                        startInterceptEvent();
-                        break;
-
-                    case MotionEvent.ACTION_POINTER_UP:
-                        mode = NONE;
-                        break;
-                }
-
-                setImageMatrix(matrix);
-                invalidate();
-                return true; // indicate event was handled
+                case MotionEvent.ACTION_POINTER_UP:
+                    mode = NONE;
+                    break;
             }
 
+            setImageMatrix(matrix);
+            invalidate();
+            return true; // indicate event was handled
         });
     }
 
@@ -207,7 +201,7 @@ public class TouchImageView extends AppCompatImageView {
             int bmWidth = drawable.getIntrinsicWidth();
             int bmHeight = drawable.getIntrinsicHeight();
 
-            Log.d("bmSize", "bmWidth: " + bmWidth + " bmHeight : " + bmHeight);
+            Timber.d("bmSize bmWidth:%s , bmHeight: %s", bmWidth, bmHeight);
 
             float scaleX = (float) viewWidth / (float) bmWidth;
             float scaleY = (float) viewHeight / (float) bmHeight;

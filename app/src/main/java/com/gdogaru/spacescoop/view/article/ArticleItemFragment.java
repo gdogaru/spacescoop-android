@@ -117,7 +117,7 @@ public class ArticleItemFragment extends BaseFragment {
     private void displayArticle(Article article) {
         toolbar.setTitle(article.getTitle());
 
-        newsImage.setOnClickListener(v -> FullImageActivity.start(requireActivity(), article.getHeadImageUrl()));
+        newsImage.setOnClickListener(v -> FullImageActivity.start(requireActivity(), article.getHeadImageUrl(), newsImage));
 
         dateText.setText(FormatUtil.formatForUI(article.getPublishDate(), "en"));
         imageDownloader.display(article.getHeadImageUrl(), newsImage);
@@ -142,7 +142,7 @@ public class ArticleItemFragment extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.share) {
-            Intent share = new Intent(android.content.Intent.ACTION_SEND);
+            Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
             share.putExtra(Intent.EXTRA_TEXT, article.getLink());
 

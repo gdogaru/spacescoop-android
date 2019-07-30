@@ -44,14 +44,10 @@ public class IntStorageDiskAdapter implements DiskAdapter {
 
     @Override
     public boolean contains(String path) {
-        FileInputStream fi = null;
-        try {
-            fi = appContext.openFileInput(createLocalPath(path));
+        try (FileInputStream fi = appContext.openFileInput(createLocalPath(path))) {
             return fi.available() > 0;
         } catch (Exception e) {
             return false;
-        } finally {
-            IOUtils.closeQuietly(fi);
         }
     }
 
@@ -62,31 +58,21 @@ public class IntStorageDiskAdapter implements DiskAdapter {
 
     @Override
     public byte[] read(String path) {
-        FileInputStream stream = null;
-        try {
-            stream = appContext.openFileInput(createLocalPath(path));
+        try (FileInputStream stream = appContext.openFileInput(createLocalPath(path))) {
             return IOUtils.toByteArray(stream);
         } catch (Exception e) {
             Timber.e(e, "Error reading file");
             return null;
-        } finally {
-            IOUtils.closeQuietly(stream);
         }
-
     }
 
     @Override
     public void write(byte[] data, String path) {
-        FileOutputStream stream = null;
-        try {
-            stream = appContext.openFileOutput(createLocalPath(path), Context.MODE_PRIVATE);
+        try (FileOutputStream stream = appContext.openFileOutput(createLocalPath(path), Context.MODE_PRIVATE)) {
             IOUtils.write(data, stream);
-
         } catch (Exception e) {
             Timber.e(e, "Error reading file");
             throw new RuntimeException(e);
-        } finally {
-            IOUtils.closeQuietly(stream);
         }
     }
 

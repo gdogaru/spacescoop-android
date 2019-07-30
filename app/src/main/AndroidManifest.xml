@@ -20,24 +20,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.gdogaru.spacescoop">
 
-    <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:resizeable="true"
-        android:smallScreens="true"
-        android:xlargeScreens="true" />
-
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!-- Optional permission for reliable local dispatching on non-Google Play devices -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <application
         android:name="com.gdogaru.spacescoop.SpaceScoopApp"
         android:allowBackup="false"
@@ -81,12 +63,6 @@
             <!--android:theme="@style/SpaceScoopThemeFullscreen">-->
         </activity>
 
-        <provider
-            android:name="androidx.work.impl.WorkManagerInitializer"
-            android:authorities="${applicationId}.workmanager-init"
-            android:exported="false"
-            tools:node="remove" />
-
         <meta-data
             android:name="google_analytics_adid_collection_enabled"
             android:value="false" />
@@ -95,7 +71,44 @@
             android:name="firebase_crashlytics_collection_enabled"
             android:value="false" />
 
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            android:exported="false"
+            tools:node="remove" />
+
+        <uses-library
+            android:name="android.test.runner"
+            android:required="false" />
+
+        <uses-library
+            android:name="android.test.base"
+            android:required="false" />
+
+        <uses-library
+            android:name="android.test.mock"
+            android:required="false" />
+
     </application>
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Optional permission for reliable local dispatching on non-Google Play devices -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 </manifest>
 

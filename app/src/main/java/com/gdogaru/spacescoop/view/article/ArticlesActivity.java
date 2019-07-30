@@ -32,6 +32,8 @@ import com.gdogaru.spacescoop.db.NewsDao;
 import com.gdogaru.spacescoop.events.PageChangedEvent;
 import com.gdogaru.spacescoop.view.common.BaseActivity;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -82,9 +84,9 @@ public class ArticlesActivity extends BaseActivity {
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NotNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState != null && savedInstanceState.containsKey(PAGER_KEY)) {
+        if (savedInstanceState.containsKey(PAGER_KEY)) {
             viewPager.onRestoreInstanceState(savedInstanceState.getParcelable(PAGER_KEY));
         }
     }
@@ -111,8 +113,9 @@ public class ArticlesActivity extends BaseActivity {
 
     private void postSelectedPage(int position) {
         Long id = adapter.getIdForPosition(position);
-        if (id != null)
+        if (id != null) {
             viewPager.postDelayed(() -> bus.post(new PageChangedEvent(id, position)), 100);
+        }
     }
 
 

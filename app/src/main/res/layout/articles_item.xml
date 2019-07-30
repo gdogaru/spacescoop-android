@@ -58,17 +58,6 @@
                 app:layout_collapseParallaxMultiplier="0.8"
                 tools:src="@drawable/unawe_logo" />
 
-            <TextView
-                android:id="@+id/dateText"
-                style="@style/SpaceScoop.DateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginTop="5dp"
-                android:paddingStart="@dimen/margin"
-                android:paddingEnd="@dimen/margin"
-                android:paddingBottom="10dp"
-                tools:text="20 may 2014" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -78,6 +67,18 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/SpaceScoopToolbarpopupTheme"
                 app:theme="@style/SpaceScoopToolbarStyle" />
+
+            <TextView
+                android:id="@+id/dateText"
+                style="@style/DateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="5dp"
+                android:paddingStart="@dimen/margin"
+                android:paddingEnd="@dimen/margin"
+                android:paddingBottom="10dp"
+                tools:text="20 may 2014" />
 
         </net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout>
 

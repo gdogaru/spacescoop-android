@@ -1,6 +1,6 @@
  ![icon](assets/logo.png)
 
-UNAWE|SpaceScoop
+#UNAWE|SpaceScoop
 ==========
 
 ![SLicense](https://img.shields.io/badge/License-GPLv3-red.svg)

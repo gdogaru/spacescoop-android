@@ -26,6 +26,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 
 import com.gdogaru.spacescoop.R;
 import com.gdogaru.spacescoop.controllers.AnalyticsHelper;
@@ -54,17 +56,18 @@ public class FullImageActivity extends BaseActivity {
     @Inject
     AnalyticsHelper analyticsHelper;
 
-    public static void start(Activity activity, String url) {
+    public static void start(Activity activity, String url, ImageView fromView) {
         Intent intent = new Intent(activity, FullImageActivity.class);
         intent.putExtra(IMAGE_URI, url);
-        activity.startActivity(intent);
+        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, fromView, activity.getString(R.string.article_image_transition));
+        ActivityCompat.startActivity(activity, intent, activityOptions.toBundle());
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.full_image);
+        setContentView(R.layout.article_full_image);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);

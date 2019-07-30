@@ -29,6 +29,8 @@ import androidx.fragment.app.FragmentManager;
 import com.gdogaru.spacescoop.SpaceScoopApp;
 import com.gdogaru.spacescoop.db.DatabaseModule;
 
+import org.jetbrains.annotations.NotNull;
+
 import dagger.android.AndroidInjection;
 import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.HasSupportFragmentInjector;
@@ -38,13 +40,11 @@ import dagger.android.support.HasSupportFragmentInjector;
  */
 public class AppInjector {
 
-    public static AppComponent appComponent;
-
     private AppInjector() {
     }
 
     public static void init(SpaceScoopApp app) {
-        appComponent = DaggerAppComponent.builder()
+        AppComponent appComponent = DaggerAppComponent.builder()
                 .applicationModule(new ApplicationModule(app))
                 .roomModule(new DatabaseModule(app))
                 .build();
@@ -52,38 +52,38 @@ public class AppInjector {
 
         app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+            public void onActivityCreated(@NotNull Activity activity, Bundle savedInstanceState) {
                 handleActivity(activity);
             }
 
             @Override
-            public void onActivityStarted(Activity activity) {
-
+            public void onActivityStarted(@NotNull Activity activity) {
+                //empty
             }
 
             @Override
-            public void onActivityResumed(Activity activity) {
-
+            public void onActivityResumed(@NotNull Activity activity) {
+                //empty
             }
 
             @Override
-            public void onActivityPaused(Activity activity) {
-
+            public void onActivityPaused(@NotNull Activity activity) {
+                //empty
             }
 
             @Override
-            public void onActivityStopped(Activity activity) {
-
+            public void onActivityStopped(@NotNull Activity activity) {
+                //empty
             }
 
             @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-
+            public void onActivitySaveInstanceState(@NotNull Activity activity, @NotNull Bundle outState) {
+                //empty
             }
 
             @Override
-            public void onActivityDestroyed(Activity activity) {
-
+            public void onActivityDestroyed(@NotNull Activity activity) {
+                //empty
             }
         });
     }
@@ -97,7 +97,7 @@ public class AppInjector {
                     .registerFragmentLifecycleCallbacks(
                             new FragmentManager.FragmentLifecycleCallbacks() {
                                 @Override
-                                public void onFragmentPreCreated(FragmentManager fm, Fragment fragment,
+                                public void onFragmentPreCreated(@NotNull FragmentManager fm, @NotNull Fragment fragment,
                                                                  Bundle savedInstanceState) {
                                     if (fragment instanceof Injectable) {
                                         AndroidSupportInjection.inject(fragment);

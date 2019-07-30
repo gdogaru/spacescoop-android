@@ -16,8 +16,105 @@
   ~
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="SpaceScoopTheme" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">#000</item>
+        <item name="colorPrimaryDark">@color/primary_color_dark</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorAccent">@color/scoop_blue</item>
+        <item name="android:colorAccent">@color/scoop_blue</item>
+        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:colorControlNormal">@color/primary_color_accent</item>
+        <item name="android:colorControlActivated">@color/scoop_blue</item>
+        <item name="actionMenuTextColor">@color/primary_color_accent</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentTransitions" tools:ignore="NewApi">true</item>
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition" tools:ignore="NewApi">
+            @transition/change_image_transform
+        </item>
+    </style>
+
+    <style name="SpaceScoopToolbarpopupTheme" parent="ThemeOverlay.AppCompat">
+        <!-- Used to for the title of the Toolbar -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Used to for the title of the Toolbar when parent is Theme.AppCompat.Light -->
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <!-- Used to color the text of the action menu icons -->
+        <item name="android:textColorSecondary">@color/white</item>
+        <!-- Used to color the overflow menu ic_notification -->
+        <item name="actionMenuTextColor">@color/white</item>
+    </style>
+
+    <style name="SpaceScoopToolbarStyle" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:colorControlNormal">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+    </style>
+
+    <style name="SpaceScoopThemeFullscreen" parent="@style/Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="TransparentActionBar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <!-- Support library compatibility -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="SpaceScoopTheme.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/white</item>
+        <item name="android:colorPrimaryDark">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorAccent">@color/primary_color_accent</item>
+        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:textColorPrimary">@color/text_dark</item>
+        <item name="android:textColorSecondary">@color/text_dark</item>
+        <item name="android:colorControlNormal">@color/text_dark</item>
+        <item name="android:navigationBarColor" tools:ignore="NewApi">@color/primary_color_dark
+        </item>
+        <item name="android:windowContentTransitions" tools:ignore="NewApi">true</item>
+    </style>
+
+    <style name="ToolbarLight">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
+    </style>
+
+    <style name="ToolbarTextAppearanceLight">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">?colorAccent</item>
+    </style>
+
+    <style name="ToolbarTextAppearanceLight.Title">
+        <item name="android:textSize">26sp</item>
+        <item name="android:fontFamily">@font/signika_regular</item>
+    </style>
 
     <style name="GenericProgressBackground" parent="@style/SpaceScoopTheme">
         <item name="android:background">@android:color/transparent</item>
@@ -45,7 +142,7 @@
         <item name="android:shadowRadius">1</item>
     </style>
 
-    <style name="SpaceScoop.DateText" parent="@style/newsText">
+    <style name="DateText" parent="@style/newsText">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/date_text</item>
         <item name="android:layout_marginTop">-5dp</item>

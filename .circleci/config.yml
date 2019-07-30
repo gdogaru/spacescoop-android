@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Build
           command: |
-            ./gradlew lint test bundleProdRelease publishProdRelease -Pkotlin.incremental=false --no-daemon --stacktrace  --max-workers 1
+            ./gradlew lint test bundleProdRelease -Pkotlin.incremental=false --no-daemon --stacktrace  --max-workers 1
           no_output_timeout: 60000
 
       - run:

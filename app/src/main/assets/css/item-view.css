@@ -1,0 +1,63 @@
+@font-face {
+    font-family: "Helvetica Neue";
+    src: url('../fonts/helveticanueue.ttf');
+}
+
+@font-face {
+    font-family: "comic-sans";
+    src: url('../fonts/ComicSansMS3.ttf');
+}
+
+@font-face {
+    font-family: "signika";
+    src: url('../fonts/Signika-Regular.ttf');
+}
+
+
+body {
+  margin: 0;
+  marginBottom:0;
+  padding: 1em;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, Signika, Amaranth, Helvetica;
+}
+
+p{
+margin: 0 0 10px;
+font-size:16px;
+}
+.cool-fact{
+    font-family: comic-sans,cursive, sans-serif
+}
+
+.cool-fact h3{
+    font-size: 1.2em;
+    margin: .7em 0 .2em 0;
+}
+
+.img-land{
+    float: left;
+    width: 25em;
+    height: 18em;
+}
+

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Gabriel Dogaru - gdogaru@gmail.com
+  ~
+  ~  This program is free software: you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation, either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  This program is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  GNU General Public License for more details.
+  ~  *
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  ~
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="SpaceScoopTheme" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">#000</item>
+        <item name="colorPrimaryDark">@color/primary_color_dark</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorAccent">@color/scoop_blue</item>
+        <item name="android:colorAccent">@color/scoop_blue</item>
+        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="android:colorControlNormal">@color/primary_color_accent</item>
+        <item name="android:colorControlActivated">@color/scoop_blue</item>
+        <item name="actionMenuTextColor">@color/primary_color_accent</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowContentTransitions" tools:ignore="NewApi">true</item>
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition" tools:ignore="NewApi">
+            @transition/change_image_transform
+        </item>
+    </style>
+
+    <style name="SpaceScoopToolbarpopupTheme" parent="ThemeOverlay.AppCompat">
+        <!-- Used to for the title of the Toolbar -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Used to for the title of the Toolbar when parent is Theme.AppCompat.Light -->
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <!-- Used to color the text of the action menu icons -->
+        <item name="android:textColorSecondary">@color/white</item>
+        <!-- Used to color the overflow menu ic_notification -->
+        <item name="actionMenuTextColor">@color/white</item>
+    </style>
+
+    <style name="SpaceScoopToolbarStyle" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:colorControlNormal">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+    </style>
+
+    <style name="SpaceScoopThemeFullscreen" parent="@style/Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="TransparentActionBar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <!-- Support library compatibility -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="SpaceScoopTheme.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/white</item>
+        <item name="android:colorPrimaryDark">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorAccent">@color/primary_color_accent</item>
+        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:textColorPrimary">@color/text_dark</item>
+        <item name="android:textColorSecondary">@color/text_dark</item>
+        <item name="android:colorControlNormal">@color/text_dark</item>
+        <item name="android:navigationBarColor" tools:ignore="NewApi">@color/primary_color_dark
+        </item>
+        <item name="android:windowContentTransitions" tools:ignore="NewApi">true</item>
+    </style>
+
+    <style name="ToolbarLight">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
+    </style>
+
+    <style name="ToolbarTextAppearanceLight">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">?colorAccent</item>
+    </style>
+
+    <style name="ToolbarTextAppearanceLight.Title">
+        <item name="android:textSize">26sp</item>
+        <item name="android:fontFamily">@font/signika_regular</item>
+    </style>
+
+    <style name="GenericProgressBackground" parent="@style/SpaceScoopTheme">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="GenericProgressIndicator" parent="@android:style/Widget.ProgressBar.Small">
+        <item name="android:indeterminate">true</item>
+    </style>
+
+    <style name="newsText">
+        <item name="android:textSize">@dimen/title_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/list_item_text</item>
+    </style>
+
+    <style name="SpaceScoop.NewsItemTitle" parent="@style/newsText">
+        <item name="android:textSize">@dimen/item_title_text</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:shadowColor">@color/black_25</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
+    <style name="DateText" parent="@style/newsText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/date_text</item>
+        <item name="android:layout_marginTop">-5dp</item>
+    </style>
+
+    <style name="PreviewText" parent="@style/newsText">
+        <item name="android:textSize">@dimen/preview_text</item>
+        <item name="android:textColor">@color/list_item_text</item>
+    </style>
+
+    <style name="fadedText" parent="@style/newsText">
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">No offers</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#808080</item>
+    </style>
+
+    <style name="webViewText">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <style name="searchET">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/search_edit_text</item>
+        <item name="android:inputType">text</item>
+        <item name="android:imeOptions">actionGo</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="ProgressIndicatorSmall" parent="@android:style/Widget.ProgressBar.Small">
+        <item name="android:indeterminate">true</item>
+    </style>
+
+    <style name="ProgressIndicatorLarge" parent="@android:style/Widget.ProgressBar.Large">
+        <item name="android:indeterminate">true</item>
+    </style>
+
+    <style name="mainProgressIndicator" parent="ProgressIndicatorSmall">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <style name="listImage">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="titleBarLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="textTitleBar">
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:text">@string/title_text</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/titleColor</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#aaaaaa</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="menuButton">
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">0.33</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:contentDescription">@string/content_description</item>
+    </style>
+
+    <style name="viewSelector">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="rateButton">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@android:color/white</item>
+
+    </style>
+
+
+    <style name="drawerLineLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:background">@drawable/glass_press_button</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="drawerLineText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:text">@string/rate</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+    </style>
+
+    <style name="drawerLineImage">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="SettingsLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/margin</item>
+        <item name="android:paddingRight">@dimen/margin</item>
+        <item name="android:clickable">true</item>
+        <item name="android:screenReaderFocusable" tools:targetApi="p">true</item>
+    </style>
+
+    <style name="SettingsLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="SettingsSwitch">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <!--<item name="android:thumbTint">@color/scoop_blue</item>-->
+        <!--<item name="android:trackTint">@color/scoop_orange</item>-->
+    </style>
+
+    <style name="ListDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/black_25</item>
+        <item name="android:layout_marginStart">@dimen/margin_half</item>
+        <item name="android:layout_marginEnd">@dimen/margin_half</item>
+    </style>
+
+    <!-- Transparent dialog -->
+    <style name="TransparentProgressDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ToolbarExpandedTitleTextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:paddingStart">130dp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="ToolbarCollapsedTitleTextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_dark</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="ToolbarExpandedTitleTextAppearance.Portrait">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+</resources>
+

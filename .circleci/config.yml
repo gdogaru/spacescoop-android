@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 jobs:
   build:
@@ -43,13 +43,14 @@ jobs:
 
       - run:
           name: Publish to Play Alpha
-          branches:
-            only:
-              - master
-          #              - develop
           no_output_timeout: 60000
           command: |
-            ./gradlew publishProdRelease -Pkotlin.incremental=false --no-daemon --stacktrace  --max-workers 1
+            if [ "$CIRCLE_BRANCH" == "master" ];
+            then
+              ./gradlew publishProdRelease -Pkotlin.incremental=false --no-daemon --stacktrace  --max-workers 1
+            else
+              echo "Not running on $CIRCLE_BRANCH"
+            fi
 
       - store_artifacts:
           path: app/build/outputs/bundle

@@ -1,4 +1,4 @@
- ![icon](art/logo_square.png)
+ ![icon](art/unawe_logo.png)
 
 # UNAWE|SpaceScoop
 

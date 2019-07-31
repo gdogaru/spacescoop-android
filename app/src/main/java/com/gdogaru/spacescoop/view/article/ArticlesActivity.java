@@ -21,9 +21,11 @@ package com.gdogaru.spacescoop.view.article;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NavUtils;
+import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.gdogaru.spacescoop.R;
@@ -63,7 +65,28 @@ public class ArticlesActivity extends BaseActivity {
         setContentView(R.layout.articles);
         ButterKnife.bind(this);
 
+        setupViewPagerFitFlags();
         initViewPager();
+    }
+
+    private void setupViewPagerFitFlags() {
+        ViewCompat.setOnApplyWindowInsetsListener(viewPager, (v, insets) -> {
+            insets = ViewCompat.onApplyWindowInsets(v, insets);
+            if (insets.isConsumed()) {
+                return insets;
+            }
+
+            boolean consumed = false;
+            for (int i = 0, count = viewPager.getChildCount(); i < count; ++i) {
+                ViewCompat.dispatchApplyWindowInsets(viewPager.getChildAt(i), insets);
+                if (insets.isConsumed()) {
+                    consumed = true;
+                }
+            }
+            return consumed ? insets.consumeSystemWindowInsets() : insets;
+        });
+
+        viewPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
     @Override
@@ -98,8 +121,8 @@ public class ArticlesActivity extends BaseActivity {
             if (longs.size() > 0) {
                 boolean first = adapter.getCount() == 0;
                 adapter.updateIds(longs);
-                postSelectedPage(viewPager.getCurrentItem());
                 if (first) setItemId();
+                postSelectedPage(viewPager.getCurrentItem());
             }
         });
 
@@ -121,7 +144,7 @@ public class ArticlesActivity extends BaseActivity {
 
     public void setItemId() {
         long itemId = getIntent().getLongExtra(ARG_ARTICLE_ID, -1);
-        if (itemId > 0) {
+        if (itemId > -1) {
             if (viewPager != null && adapter != null) {
                 viewPager.setCurrentItem(adapter.getPositionForId(itemId));
             }

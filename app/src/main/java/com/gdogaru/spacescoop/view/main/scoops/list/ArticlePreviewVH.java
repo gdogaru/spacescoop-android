@@ -68,8 +68,10 @@ public class ArticlePreviewVH extends RecyclerView.ViewHolder {
 
         if (item.getHeadImageUrl() != null) {
             imageDownloader.displayThumb(item.getHeadImageUrl(), imageView);
+            imageView.setContentDescription(imageView.getContext().getString(R.string.article_image_description, item.getTitle()));
         } else {
             imageView.setImageDrawable(null);
+            imageView.setContentDescription("");
         }
 
         itemView.setOnClickListener(v -> selectedCallback.onItemSelected(item, imageView));

@@ -45,6 +45,7 @@ import butterknife.ButterKnife;
 public class FullImageActivity extends BaseActivity {
 
     public static final String IMAGE_URI = "image_uri";
+    public static final String IMAGE_TITLE = "image_title";
 
     @BindView(R.id.image)
     ImageView imageView;
@@ -56,7 +57,7 @@ public class FullImageActivity extends BaseActivity {
     @Inject
     AnalyticsHelper analyticsHelper;
 
-    public static void start(Activity activity, String url, ImageView fromView) {
+    public static void start(Activity activity, String url, String title, ImageView fromView) {
         Intent intent = new Intent(activity, FullImageActivity.class);
         intent.putExtra(IMAGE_URI, url);
         ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, fromView, activity.getString(R.string.article_image_transition));
@@ -75,6 +76,7 @@ public class FullImageActivity extends BaseActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         imageDownloader.display(getIntent().getStringExtra(IMAGE_URI), imageView);
+        imageView.setContentDescription(getString(R.string.article_image_description, getIntent().getStringExtra(IMAGE_TITLE)));
         analyticsHelper.logEvent(AnalyticsHelper.Event.FULL_IMAGE_VIEW, 1);
     }
 

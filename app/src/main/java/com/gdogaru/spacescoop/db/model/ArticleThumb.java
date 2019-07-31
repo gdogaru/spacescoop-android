@@ -35,6 +35,9 @@ public class ArticleThumb implements HasId {
     @ColumnInfo(name = "id")
     long id;
 
+    @ColumnInfo(name = "title")
+    private String title;
+
     @ColumnInfo(name = "headImageUrl")
     String headImageUrl;
 

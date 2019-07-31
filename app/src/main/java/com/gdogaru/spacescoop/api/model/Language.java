@@ -23,7 +23,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Created by Bogdan Balta @ TAGonSoft
+ * @author Gabriel Dogaru (gdogaru@gmail.com)
  */
 @Data
 @AllArgsConstructor

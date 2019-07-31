@@ -30,7 +30,7 @@ import com.gdogaru.spacescoop.db.model.ArticleThumb;
 import com.gdogaru.spacescoop.view.main.scoops.ItemSelectedCallback;
 
 /**
- * Created by Bogdan Balta @ TAGonSoft
+ * @author Gabriel Dogaru (gdogaru@gmail.com)
  */
 public class ArticleGridAdapter extends PagedListAdapter<ArticleThumb, ArticleThumbVH> {
 

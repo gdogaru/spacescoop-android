@@ -73,6 +73,7 @@ public class ArticleItemFragment extends BaseFragment {
     Article article;
     @State
     Long articleId;
+    boolean currentItem = false;
 
     @Inject
     ImageDownloader imageDownloader;
@@ -116,8 +117,10 @@ public class ArticleItemFragment extends BaseFragment {
 
     private void displayArticle(Article article) {
         toolbar.setTitle(article.getTitle());
+        toolbar.setContentDescription(article.getTitle());
 
-        newsImage.setOnClickListener(v -> FullImageActivity.start(requireActivity(), article.getHeadImageUrl(), newsImage));
+        newsImage.setOnClickListener(v -> FullImageActivity.start(requireActivity(), article.getHeadImageUrl(), article.getTitle(), newsImage));
+        newsImage.setContentDescription(getString(R.string.article_image_description, article.getTitle()));
 
         dateText.setText(FormatUtil.formatForUI(article.getPublishDate(), "en"));
         imageDownloader.display(article.getHeadImageUrl(), newsImage);
@@ -125,11 +128,16 @@ public class ArticleItemFragment extends BaseFragment {
 
         String data = HtmlHelper.asHtmlPage(article.getText(), isLandscapeTablet());
         webView.loadDataWithBaseURL("file:///android_asset/", data, "text/html", "utf-8", null);
+
+        if (currentItem) {
+            setActivityTitle();
+        }
     }
 
     @Subscribe
     public void onPageChanged(PageChangedEvent e) {
-        if (e.getId() == articleId) {
+        currentItem = e.getArticleId() == articleId;
+        if (currentItem) {
             setActivityTitle();
         }
     }

@@ -56,7 +56,6 @@
         <Switch
             android:id="@+id/notification_enabled"
             style="@style/SettingsSwitch"
-            android:checked="true"
             android:duplicateParentState="true" />
 
     </LinearLayout>

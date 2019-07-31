@@ -18,23 +18,15 @@
 
 package com.gdogaru.spacescoop.events;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 /**
  * @author Gabriel Dogaru (gdogaru@gmail.com)
  */
+@Data
+@AllArgsConstructor
 public class PageChangedEvent {
-    private final long id;
+    private final long articleId;
     private final int position;
-
-    public PageChangedEvent(long id, int position) {
-        this.id = id;
-        this.position = position;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public int getPosition() {
-        return position;
-    }
 }

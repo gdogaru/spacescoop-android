@@ -28,7 +28,8 @@
         android:layout_height="180dp"
         android:layout_centerInParent="true"
         android:adjustViewBounds="true"
-        android:src="@drawable/unawe_logo" />
+        android:src="@drawable/unawe_logo"
+        android:contentDescription="@string/unawe_logo" />
 
     <View
         android:layout_width="match_parent"

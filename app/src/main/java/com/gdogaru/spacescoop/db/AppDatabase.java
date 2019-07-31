@@ -28,7 +28,7 @@ import androidx.room.TypeConverters;
 
 import com.gdogaru.spacescoop.db.model.Article;
 
-@Database(entities = {Article.class}, version = 1, exportSchema = false)
+@Database(entities = {Article.class}, version = 10, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 

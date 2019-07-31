@@ -18,7 +18,7 @@ The app is a RSS Feed reader for [UNAWE| Space Scoop](https://www.unawe.org/kids
 From the UNAWE website:
 "Here you can read the latest Space Scoop, our astronomy news service for children aged 8 and above. The idea behind Space Scoop is to change the way science is often perceived by young children as an outdated and dull subject. By sharing exciting new astronomical discoveries with them, we can inspire children to develop an interest in science and technology. Space Scoop makes a wonderful tool that can be used in the classroom to teach and discuss the latest astronomy news."
 
- ##Contributing
+## Contributing
  
  Please contact me directly to discuss any improvements before starting, I have not set up a process yet and we will discuss it together.
  You should me familiar with [gitflow](https://github.com/nvie/gitflow) as code versioning methodology.

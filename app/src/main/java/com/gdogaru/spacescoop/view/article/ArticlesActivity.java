@@ -61,6 +61,7 @@ public class ArticlesActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(isLandscapeTablet() ? R.style.SpaceScoopTheme_Light : R.style.SpaceScoopTheme);
         super.onCreate(savedInstanceState);
+        postponeEnterTransition();
 
         setContentView(R.layout.articles);
         ButterKnife.bind(this);
@@ -146,7 +147,7 @@ public class ArticlesActivity extends BaseActivity {
         long itemId = getIntent().getLongExtra(ARG_ARTICLE_ID, -1);
         if (itemId > -1) {
             if (viewPager != null && adapter != null) {
-                viewPager.setCurrentItem(adapter.getPositionForId(itemId));
+                viewPager.setCurrentItem(adapter.getPositionForId(itemId), false);
             }
         }
     }

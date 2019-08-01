@@ -139,6 +139,7 @@ public class ArticleItemFragment extends BaseFragment {
         currentItem = e.getArticleId() == articleId;
         if (currentItem) {
             setActivityTitle();
+            requireActivity().startPostponedEnterTransition();
         }
     }
 

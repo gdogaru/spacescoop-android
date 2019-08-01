@@ -32,6 +32,8 @@ import java.util.concurrent.Executors;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import timber.log.Timber;
+
 @Singleton
 public class DiskImageDownloader implements ImageDownloader {
 
@@ -61,20 +63,25 @@ public class DiskImageDownloader implements ImageDownloader {
         cachingDownloader.downloadBitmap(new DownloadableImage(url));
     }
 
-    public void display(final DisplayingImage img) {
-        String url = img.getImage().getUrl();
-        if (url.equals(img.getImageView().getTag())) {
-            img.getImageView().post(() -> img.getImageView().invalidate());
-            return;
-        }
-        img.getImageView().setTag(url);
-        img.getImageView().setImageDrawable(null);
+    private void display(final DisplayingImage img) {
+        try {
+            String url = img.getImage().getUrl();
+            if (url == null || img.getImageView() == null || url.equals(img.getImageView().getTag())) {
+                if (img.getImageView() != null)
+                    img.getImageView().post(() -> img.getImageView().invalidate());
+                return;
+            }
+            img.getImageView().setTag(url);
+            img.getImageView().setImageDrawable(null);
 
-        Bitmap bitmap = img.isMemoryCacheable() ? memoryCache.get(img.getImage()) : null;
-        if (bitmap != null) {
-            uiHandler.post(new BitmapDisplayer(bitmap, img));
-        } else {
-            queuePhoto(img);
+            Bitmap bitmap = img.isMemoryCacheable() ? memoryCache.get(img.getImage()) : null;
+            if (bitmap != null) {
+                uiHandler.post(new BitmapDisplayer(bitmap, img));
+            } else {
+                queuePhoto(img);
+            }
+        } catch (Exception e) {
+            Timber.e(e, "Could not show image");
         }
     }
 

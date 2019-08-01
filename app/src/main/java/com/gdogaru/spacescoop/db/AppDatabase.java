@@ -51,6 +51,7 @@ public abstract class AppDatabase extends RoomDatabase {
         return Room.databaseBuilder(context,
                 AppDatabase.class,
                 "spacescoopdb")
+                .fallbackToDestructiveMigration()
 //                .allowMainThreadQueries()
                 .build();
     }

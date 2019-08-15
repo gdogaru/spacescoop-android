@@ -31,8 +31,8 @@ versions.kotlin = '1.2.71'
 versions.jetifier = "1.0.0-beta04"
 versions.gmsVersion = '17.0.0'
 versions.arch_core = "1.1.1"
-versions.room = "1.1.0-beta2"
-versions.navigation = "1.0.0"
+versions.room = "2.2.0-alpha02"
+versions.navigation = "2.1.0-rc01"
 versions.lifecycle = "1.1.1"
 versions.support = "28.0.0"
 versions.multidex = "1.0.3"
@@ -130,3 +130,4 @@ private static String escapeBranchName(String branch) {
 
 ext.androidAppVersionCode = Integer.valueOf(System.env.CIRCLE_BUILD_NUM ?: 0) + 100
 ext.androidAppVersionName = androidAppVersionName()
+

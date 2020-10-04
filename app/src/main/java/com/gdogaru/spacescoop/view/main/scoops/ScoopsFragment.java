@@ -94,7 +94,7 @@ public class ScoopsFragment extends BaseFragment implements HasTitle {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        settingsController.isInListModeLiveData().observe(this, this::changeLayout);
+        settingsController.isInListModeLiveData().observe(ScoopsFragment.this, this::changeLayout);
 
         swipeRefreshLayout.setOnRefreshListener(() ->
                 viewModel.getNewScoops().observe(ScoopsFragment.this, staleState -> {

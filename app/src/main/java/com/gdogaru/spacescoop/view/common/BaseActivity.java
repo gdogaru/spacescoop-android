@@ -19,34 +19,22 @@
 package com.gdogaru.spacescoop.view.common;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.gdogaru.spacescoop.R;
 import com.squareup.otto.Bus;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.HasSupportFragmentInjector;
-
 /**
  * @author Gabriel Dogaru (gdogaru@gmail.com)
  */
-public abstract class BaseActivity extends AppCompatActivity implements HasSupportFragmentInjector {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Inject
     protected Bus bus;
-    @Inject
-    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
     public boolean isLandscapeTablet() {
         return getResources().getBoolean(R.bool.isLandscapeTablet);
-    }
-
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return dispatchingAndroidInjector;
     }
 
     @Override

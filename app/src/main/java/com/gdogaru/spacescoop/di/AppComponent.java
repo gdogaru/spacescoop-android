@@ -32,7 +32,9 @@ import dagger.android.AndroidInjectionModule;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
-@Component(modules = {AndroidInjectionModule.class, AndroidSupportInjectionModule.class,
+@Component(modules = {
+        AndroidInjectionModule.class,
+        AndroidSupportInjectionModule.class,
         ApplicationModule.class, CoreModule.class, DatabaseModule.class,
         ActivitiesModule.class, ViewModelModule.class, WorkerBindingModule.class, AssistedInjectModule.class
 })

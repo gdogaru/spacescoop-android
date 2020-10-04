@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -33,7 +34,6 @@ import org.jetbrains.annotations.NotNull;
 
 import dagger.android.AndroidInjection;
 import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Helper class to automatically inject fragments if they implement [Injectable].
@@ -89,10 +89,9 @@ public class AppInjector {
     }
 
     private static void handleActivity(Activity activity) {
-        if (activity instanceof HasSupportFragmentInjector) {
-            AndroidInjection.inject(activity);
-        }
-        if (activity instanceof FragmentActivity) {
+        AndroidInjection.inject(activity);
+
+        if (activity instanceof AppCompatActivity) {
             ((FragmentActivity) activity).getSupportFragmentManager()
                     .registerFragmentLifecycleCallbacks(
                             new FragmentManager.FragmentLifecycleCallbacks() {

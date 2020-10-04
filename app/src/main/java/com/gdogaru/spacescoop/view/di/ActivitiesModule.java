@@ -18,6 +18,7 @@
 
 package com.gdogaru.spacescoop.view.di;
 
+import com.gdogaru.spacescoop.view.SplashActivity;
 import com.gdogaru.spacescoop.view.article.ArticleItemFragment;
 import com.gdogaru.spacescoop.view.article.ArticlesActivity;
 import com.gdogaru.spacescoop.view.article.FullImageActivity;
@@ -36,23 +37,32 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public interface ActivitiesModule {
 
+    @ContributesAndroidInjector
+    SplashActivity contributeSplashActivity();
+
     @ContributesAndroidInjector(modules = {MainActivityBuildersModule.class})
     MainActivity contributeMainActivity();
 
     @ContributesAndroidInjector(modules = {ArticlesActivityBuildersModule.class})
     ArticlesActivity contributeItemViewActivity();
 
-    @ContributesAndroidInjector(modules = {FullImageActivityModule.class})
+    @ContributesAndroidInjector
     FullImageActivity contributeFullImageActivity();
+
+    @Module
+    interface ArticlesActivityBuildersModule {
+        @ContributesAndroidInjector
+        ArticleItemFragment contributeArticleItemFragment();
+    }
 
     @Module
     interface MainActivityBuildersModule {
 
         @ContributesAndroidInjector
-        ScoopsFragment contributeMainListViewFragment();
+        ScoopsFragment contributeScoopsFragment();
 
         @ContributesAndroidInjector
-        SearchFragment contributeMainSearchFragment();
+        SearchFragment contributeSearchFragment();
 
         @ContributesAndroidInjector
         CreditsFragment contributeCreditsFragment();
@@ -62,15 +72,5 @@ public interface ActivitiesModule {
 
         @Binds
         ArticleDisplayer displayer(MainActivity activity);
-    }
-
-    @Module
-    interface ArticlesActivityBuildersModule {
-        @ContributesAndroidInjector
-        ArticleItemFragment contributeArticleItemFragment();
-    }
-
-    @Module
-    interface FullImageActivityModule {
     }
 }

@@ -84,10 +84,10 @@ public class ScoopsFragment extends BaseFragment implements HasTitle {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        settingsController.isInListModeLiveData().observe(ScoopsFragment.this, this::changeLayout);
+        settingsController.isInListModeLiveData().observe(getViewLifecycleOwner(), this::changeLayout);
 
         binding.swipeRefreshLayout.setOnRefreshListener(() ->
-                viewModel.getNewScoops().observe(ScoopsFragment.this, staleState -> {
+                viewModel.getNewScoops().observe(getViewLifecycleOwner(), staleState -> {
                     if (staleState.isEndState()) {
                         binding.swipeRefreshLayout.setRefreshing(false);
                     }
@@ -97,12 +97,12 @@ public class ScoopsFragment extends BaseFragment implements HasTitle {
         FragmentActivity activity = requireActivity();
         mainListAdapter = new ArticleListAdapter(activity, lang, imageDownloader, (newsId, image) -> articleDisplayer.displayArticle(image, newsId.getId()));
         mainGridAdapter = new ArticleGridAdapter(activity, lang, imageDownloader, (newsId, image) -> articleDisplayer.displayArticle(image, newsId.getId()));
-        viewModel.getListLiveData().observe(this, newsPreviews -> mainListAdapter.submitList(newsPreviews));
-        viewModel.getGridLiveData().observe(this, newsPreviews -> mainGridAdapter.submitList(newsPreviews));
+        viewModel.getListLiveData().observe(getViewLifecycleOwner(), newsPreviews -> mainListAdapter.submitList(newsPreviews));
+        viewModel.getGridLiveData().observe(getViewLifecycleOwner(), newsPreviews -> mainGridAdapter.submitList(newsPreviews));
         gridLayoutManager = new GridLayoutManager(activity, getResources().getInteger(R.integer.scoops_grid_columns));
         listLayoutManager = new GridLayoutManager(activity, getResources().getInteger(R.integer.scoops_list_columns));
 
-        viewModel.loadMoreActive().observe(this, loading -> binding.bottomProgress.setVisibility(loading ? View.VISIBLE : View.GONE));
+        viewModel.loadMoreActive().observe(getViewLifecycleOwner(), loading -> binding.bottomProgress.setVisibility(loading ? View.VISIBLE : View.GONE));
         initScrollLoader();
     }
 

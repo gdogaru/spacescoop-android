@@ -89,7 +89,7 @@ public class ArticleItemFragment extends BaseFragment {
         ((WebView) binding.webView).getSettings().setJavaScriptEnabled(true);
 
         if (article == null) {
-            newsDao.queryForId(articleId).observe(this, result -> {
+            newsDao.queryForId(articleId).observe(getViewLifecycleOwner(), result -> {
                 article = result;
                 displayArticle(article);
             });

@@ -91,7 +91,7 @@ public class SearchFragment extends BaseFragment implements HasTitle {
         ArticleListAdapter mainListAdapter = new ArticleListAdapter(requireActivity(), settingsController.getLanguage(), imageDownloader, (newsId, image) -> articleDisplayer.displayArticle(null, newsId.getId()));
         binding.recycler.setAdapter(mainListAdapter);
         binding.recycler.setLayoutManager(new GridLayoutManager(requireActivity(), 1));
-        viewmodel.getListLiveData().observe(this, mainListAdapter::submitList);
+        viewmodel.getListLiveData().observe(getViewLifecycleOwner(), mainListAdapter::submitList);
 
         binding.searchIcon.setOnClickListener(v -> search());
     }

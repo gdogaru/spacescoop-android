@@ -51,7 +51,7 @@ public class ArticleGridAdapter extends PagedListAdapter<ArticleThumb, ArticleTh
     @NonNull
     @Override
     public ArticleThumbVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return ArticleThumbVH.create(inflater, parent);
+        return ArticleThumbVH.create(inflater);
     }
 
     @Override

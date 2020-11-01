@@ -50,11 +50,10 @@ import timber.log.Timber;
 
 public class GetArticlesWorker extends Worker {
     public static final int MAX_LOAD = 50;
-    private static final int MAX_SVC_RETRY = 3;
     public static final String PARAM_LANG = "LANG";
     public static final String PARAM_UPDATE_NEW = "UPDATE_NEW";
     public static final String PARAM_NOTIFY = "NOTIFY";
-
+    private static final int MAX_SVC_RETRY = 3;
     private final AppSettingsController settingsController;
     private final ImageDownloader imageDownloader;
     private final NewsDao newsDao;
@@ -63,10 +62,6 @@ public class GetArticlesWorker extends Worker {
     private final String lang;
     private final boolean updateNew;
     private final boolean notifyOnNew;
-
-    @AssistedInject.Factory
-    public interface Factory extends ChildWorkerFactory {
-    }
 
     @AssistedInject
     public GetArticlesWorker(@Assisted @NonNull Context appContext,
@@ -82,6 +77,28 @@ public class GetArticlesWorker extends Worker {
         lang = Preconditions.checkNotNull(workerParams.getInputData().getString(PARAM_LANG));
         updateNew = workerParams.getInputData().getBoolean(PARAM_UPDATE_NEW, true);
         notifyOnNew = workerParams.getInputData().getBoolean(PARAM_NOTIFY, false);
+    }
+
+    private static String toSmallImage(String headImageUrl) {
+        if (headImageUrl.contains("/screen/")) {
+            String thumb = headImageUrl.replaceAll("/screen/", "/newsmini/");
+            if (exists(thumb)) {
+                return thumb;
+            }
+        }
+        return headImageUrl + "#small";
+    }
+
+    public static boolean exists(String URLName) {
+        try {
+            HttpURLConnection.setFollowRedirects(false);
+            // note : you may also need   HttpURLConnection.setInstanceFollowRedirects(false)
+            HttpURLConnection con = (HttpURLConnection) new URL(URLName).openConnection();
+            con.setRequestMethod("HEAD");
+            return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @NonNull
@@ -178,7 +195,6 @@ public class GetArticlesWorker extends Worker {
         return items;
     }
 
-
     private List<Article> itemToNews(List<SyndEntry> items) {
         List<Article> result = new ArrayList<>();
         for (SyndEntry item : items) {
@@ -208,27 +224,8 @@ public class GetArticlesWorker extends Worker {
         return article;
     }
 
-
-    private static String toSmallImage(String headImageUrl) {
-        if (headImageUrl.contains("/screen/")) {
-            String thumb = headImageUrl.replaceAll("/screen/", "/newsmini/");
-            if (exists(thumb)) {
-                return thumb;
-            }
-        }
-        return headImageUrl + "#small";
-    }
-
-    public static boolean exists(String URLName) {
-        try {
-            HttpURLConnection.setFollowRedirects(false);
-            // note : you may also need   HttpURLConnection.setInstanceFollowRedirects(false)
-            HttpURLConnection con = (HttpURLConnection) new URL(URLName).openConnection();
-            con.setRequestMethod("HEAD");
-            return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
-        } catch (Exception e) {
-            return false;
-        }
+    @AssistedInject.Factory
+    public interface Factory extends ChildWorkerFactory {
     }
 
 }

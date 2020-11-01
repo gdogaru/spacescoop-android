@@ -29,7 +29,7 @@ import java.util.List;
  *
  */
 public class ArticlesPagerAdapter extends FragmentStatePagerAdapter {
-    private List<Long> articleIds = new ArrayList<>();
+    private final List<Long> articleIds = new ArrayList<>();
 
     public ArticlesPagerAdapter(AppCompatActivity activity) {
         super(activity.getSupportFragmentManager());

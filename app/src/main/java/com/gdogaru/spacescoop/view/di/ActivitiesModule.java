@@ -33,7 +33,6 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
-@SuppressWarnings("unused")
 @Module
 public interface ActivitiesModule {
 
@@ -44,33 +43,33 @@ public interface ActivitiesModule {
     MainActivity contributeMainActivity();
 
     @ContributesAndroidInjector(modules = {ArticlesActivityBuildersModule.class})
-    ArticlesActivity contributeItemViewActivity();
+    ArticlesActivity contributeArticlesActivity();
 
     @ContributesAndroidInjector
     FullImageActivity contributeFullImageActivity();
+}
 
-    @Module
-    interface ArticlesActivityBuildersModule {
-        @ContributesAndroidInjector
-        ArticleItemFragment contributeArticleItemFragment();
-    }
+@Module
+interface ArticlesActivityBuildersModule {
+    @ContributesAndroidInjector
+    ArticleItemFragment contributeArticleItemFragment();
+}
 
-    @Module
-    interface MainActivityBuildersModule {
+@Module
+interface MainActivityBuildersModule {
 
-        @ContributesAndroidInjector
-        ScoopsFragment contributeScoopsFragment();
+    @ContributesAndroidInjector
+    ScoopsFragment contributeScoopsFragment();
 
-        @ContributesAndroidInjector
-        SearchFragment contributeSearchFragment();
+    @ContributesAndroidInjector
+    SearchFragment contributeSearchFragment();
 
-        @ContributesAndroidInjector
-        CreditsFragment contributeCreditsFragment();
+    @ContributesAndroidInjector
+    CreditsFragment contributeCreditsFragment();
 
-        @ContributesAndroidInjector
-        SettingsFragment contributeSettingsFragment();
+    @ContributesAndroidInjector
+    SettingsFragment contributeSettingsFragment();
 
-        @Binds
-        ArticleDisplayer displayer(MainActivity activity);
-    }
+    @Binds
+    ArticleDisplayer displayer(MainActivity activity);
 }

@@ -34,13 +34,10 @@ public class ArticleThumb implements HasId {
     @PrimaryKey
     @ColumnInfo(name = "id")
     long id;
-
-    @ColumnInfo(name = "title")
-    private String title;
-
     @ColumnInfo(name = "headImageUrl")
     String headImageUrl;
-
     @ColumnInfo(name = "language")
     String language;
+    @ColumnInfo(name = "title")
+    private String title;
 }

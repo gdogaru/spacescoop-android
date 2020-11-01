@@ -102,7 +102,9 @@ public class AppInjector {
                                         AndroidSupportInjection.inject(fragment);
                                     }
                                 }
-                            }, true);
+                            },
+                            true
+                    );
         }
     }
 }

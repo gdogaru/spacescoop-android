@@ -32,7 +32,7 @@ import com.gdogaru.spacescoop.R;
 
 public class GalaxyProgressDialog extends Dialog {
 
-    private ImageView iv;
+    private final ImageView iv;
 
     public GalaxyProgressDialog(Context context) {
         super(context, R.style.TransparentProgressDialog);

@@ -40,22 +40,19 @@ public class TouchImageView extends AppCompatImageView {
     private static final int DRAG = 1;
     private static final int ZOOM = 2;
     private static final int CLICK = 3;
+    ScaleGestureDetector mScaleDetector;
+    Context context;
     private float origWidth, origHeight;
     private Matrix matrix;
     private int mode = NONE;
-    private PointF last = new PointF();
-    private PointF start = new PointF();
-    private float minScale = 1f;
+    private final PointF last = new PointF();
+    private final PointF start = new PointF();
+    private final float minScale = 1f;
     private float maxScale = 3f;
     private float[] m;
     private int viewWidth, viewHeight;
     private float saveScale = 1f;
     private int oldMeasuredWidth, oldMeasuredHeight;
-
-
-    ScaleGestureDetector mScaleDetector;
-
-    Context context;
 
     public TouchImageView(Context context) {
         super(context);

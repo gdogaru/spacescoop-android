@@ -30,6 +30,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.gdogaru.spacescoop.R;
 import com.gdogaru.spacescoop.controllers.AppSettingsController;
+import com.gdogaru.spacescoop.databinding.ArticlesBinding;
 import com.gdogaru.spacescoop.db.NewsDao;
 import com.gdogaru.spacescoop.events.PageChangedEvent;
 import com.gdogaru.spacescoop.view.common.BaseActivity;
@@ -38,9 +39,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * @author Gabriel Dogaru (gdogaru@gmail.com)
  */
@@ -48,14 +46,13 @@ public class ArticlesActivity extends BaseActivity {
     public static final String ARG_ARTICLE_ID = "ARTICLE_ID";
     private static final String PAGER_KEY = "PAGER";
 
-    @BindView(R.id.viewPager)
-    ViewPager viewPager;
     @Inject
     NewsDao newsDao;
     @Inject
     AppSettingsController settingsController;
 
     private ArticlesPagerAdapter adapter;
+    private ArticlesBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,23 +60,23 @@ public class ArticlesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         postponeEnterTransition();
 
-        setContentView(R.layout.articles);
-        ButterKnife.bind(this);
+        binding = ArticlesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         setupViewPagerFitFlags();
         initViewPager();
     }
 
     private void setupViewPagerFitFlags() {
-        ViewCompat.setOnApplyWindowInsetsListener(viewPager, (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.viewPager, (v, insets) -> {
             insets = ViewCompat.onApplyWindowInsets(v, insets);
             if (insets.isConsumed()) {
                 return insets;
             }
 
             boolean consumed = false;
-            for (int i = 0, count = viewPager.getChildCount(); i < count; ++i) {
-                ViewCompat.dispatchApplyWindowInsets(viewPager.getChildAt(i), insets);
+            for (int i = 0, count = binding.viewPager.getChildCount(); i < count; ++i) {
+                ViewCompat.dispatchApplyWindowInsets(binding.viewPager.getChildAt(i), insets);
                 if (insets.isConsumed()) {
                     consumed = true;
                 }
@@ -87,7 +84,7 @@ public class ArticlesActivity extends BaseActivity {
             return consumed ? insets.consumeSystemWindowInsets() : insets;
         });
 
-        viewPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        binding.viewPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
     @Override
@@ -104,30 +101,30 @@ public class ArticlesActivity extends BaseActivity {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(PAGER_KEY, viewPager.onSaveInstanceState());
+        outState.putParcelable(PAGER_KEY, binding.viewPager.onSaveInstanceState());
     }
 
     @Override
     protected void onRestoreInstanceState(@NotNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState.containsKey(PAGER_KEY)) {
-            viewPager.onRestoreInstanceState(savedInstanceState.getParcelable(PAGER_KEY));
+            binding.viewPager.onRestoreInstanceState(savedInstanceState.getParcelable(PAGER_KEY));
         }
     }
 
     private void initViewPager() {
         adapter = new ArticlesPagerAdapter(this);
-        viewPager.setAdapter(adapter);
+        binding.viewPager.setAdapter(adapter);
         newsDao.getAllIds(settingsController.getLanguage()).observe(this, longs -> {
             if (longs.size() > 0) {
                 boolean first = adapter.getCount() == 0;
                 adapter.updateIds(longs);
                 if (first) setItemId();
-                postSelectedPage(viewPager.getCurrentItem());
+                postSelectedPage(binding.viewPager.getCurrentItem());
             }
         });
 
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        binding.viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 postSelectedPage(position);
@@ -138,7 +135,7 @@ public class ArticlesActivity extends BaseActivity {
     private void postSelectedPage(int position) {
         Long id = adapter.getIdForPosition(position);
         if (id != null) {
-            viewPager.postDelayed(() -> bus.post(new PageChangedEvent(id, position)), 100);
+            binding.viewPager.postDelayed(() -> bus.post(new PageChangedEvent(id, position)), 100);
         }
     }
 
@@ -146,8 +143,8 @@ public class ArticlesActivity extends BaseActivity {
     public void setItemId() {
         long itemId = getIntent().getLongExtra(ARG_ARTICLE_ID, -1);
         if (itemId > -1) {
-            if (viewPager != null && adapter != null) {
-                viewPager.setCurrentItem(adapter.getPositionForId(itemId), false);
+            if (binding.viewPager != null && adapter != null) {
+                binding.viewPager.setCurrentItem(adapter.getPositionForId(itemId), false);
             }
         }
     }

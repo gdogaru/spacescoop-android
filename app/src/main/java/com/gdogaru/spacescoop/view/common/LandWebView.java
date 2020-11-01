@@ -45,11 +45,7 @@ public class LandWebView extends WebView {
         if (MotionEventCompat.findPointerIndex(event, 0) == -1) {
             return super.onTouchEvent(event);
         }
-        if (event.getPointerCount() >= 2) {
-            requestDisallowInterceptTouchEvent(true);
-        } else {
-            requestDisallowInterceptTouchEvent(false);
-        }
+        requestDisallowInterceptTouchEvent(event.getPointerCount() >= 2);
         return super.onTouchEvent(event);
     }
 

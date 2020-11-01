@@ -28,19 +28,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.evernote.android.state.State;
 import com.gdogaru.spacescoop.R;
 import com.gdogaru.spacescoop.controllers.ImageDownloader;
+import com.gdogaru.spacescoop.databinding.ArticlesItemBinding;
 import com.gdogaru.spacescoop.db.NewsDao;
 import com.gdogaru.spacescoop.db.model.Article;
 import com.gdogaru.spacescoop.events.PageChangedEvent;
@@ -49,26 +47,9 @@ import com.gdogaru.spacescoop.util.HtmlHelper;
 import com.gdogaru.spacescoop.view.common.BaseFragment;
 import com.squareup.otto.Subscribe;
 
-import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
-
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class ArticleItemFragment extends BaseFragment {
-
-    @BindView(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout collapsingToolbarLayout;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.webView)
-    WebView webView;
-    @BindView(R.id.dateText)
-    TextView dateText;
-    @BindView(R.id.newsImage)
-    ImageView newsImage;
-
     @State
     Article article;
     @State
@@ -80,6 +61,8 @@ public class ArticleItemFragment extends BaseFragment {
     @Inject
     NewsDao newsDao;
 
+    private ArticlesItemBinding binding;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,21 +72,21 @@ public class ArticleItemFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.articles_item, container, false);
+        binding = ArticlesItemBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
 
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
         Typeface tf = ResourcesCompat.getFont(activity, R.font.signika_regular);
-        collapsingToolbarLayout.setCollapsedTitleTypeface(tf);
-        collapsingToolbarLayout.setExpandedTitleTypeface(tf);
+        binding.collapsingToolbar.setCollapsedTitleTypeface(tf);
+        binding.collapsingToolbar.setExpandedTitleTypeface(tf);
 
-        webView.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
-        webView.getSettings().setJavaScriptEnabled(true);
+        binding.webView.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
+        ((WebView) binding.webView).getSettings().setJavaScriptEnabled(true);
 
         if (article == null) {
             newsDao.queryForId(articleId).observe(this, result -> {
@@ -116,18 +99,18 @@ public class ArticleItemFragment extends BaseFragment {
     }
 
     private void displayArticle(Article article) {
-        toolbar.setTitle(article.getTitle());
-        toolbar.setContentDescription(article.getTitle());
+        binding.toolbar.setTitle(article.getTitle());
+        binding.toolbar.setContentDescription(article.getTitle());
 
-        newsImage.setOnClickListener(v -> FullImageActivity.start(requireActivity(), article.getHeadImageUrl(), article.getTitle(), newsImage));
-        newsImage.setContentDescription(getString(R.string.article_image_description, article.getTitle()));
+        binding.newsImage.setOnClickListener(v -> FullImageActivity.start(requireActivity(), article.getHeadImageUrl(), article.getTitle(), binding.newsImage));
+        binding.newsImage.setContentDescription(getString(R.string.article_image_description, article.getTitle()));
 
-        dateText.setText(FormatUtil.formatForUI(article.getPublishDate(), "en"));
-        imageDownloader.display(article.getHeadImageUrl(), newsImage);
+        binding.dateText.setText(FormatUtil.formatForUI(article.getPublishDate(), "en"));
+        imageDownloader.display(article.getHeadImageUrl(), binding.newsImage);
 
 
         String data = HtmlHelper.asHtmlPage(article.getText(), isLandscapeTablet());
-        webView.loadDataWithBaseURL("file:///android_asset/", data, "text/html", "utf-8", null);
+        ((WebView) binding.webView).loadDataWithBaseURL("file:///android_asset/", data, "text/html", "utf-8", null);
 
         if (currentItem) {
             setActivityTitle();
@@ -163,29 +146,28 @@ public class ArticleItemFragment extends BaseFragment {
 
     void setActivityTitle() {
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
-        activity.setSupportActionBar(toolbar);
+        activity.setSupportActionBar(binding.toolbar);
         ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        if (article != null) toolbar.setTitle(article.getTitle());
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
+        if (article != null) binding.toolbar.setTitle(article.getTitle());
     }
 
     public Article getArticle() {
         return article;
     }
 
-
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
+    public void setArticle(Article article) {
+        this.article = article;
     }
 
     public Long getArticleId() {
         return articleId;
+    }
+
+    public void setArticleId(Long articleId) {
+        this.articleId = articleId;
     }
 }

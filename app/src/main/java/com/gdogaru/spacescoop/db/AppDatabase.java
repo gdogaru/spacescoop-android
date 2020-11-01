@@ -34,8 +34,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase INSTANCE;
 
-    public abstract NewsDao newsDao();
-
     public static AppDatabase getInstance(@NonNull final Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
@@ -55,4 +53,6 @@ public abstract class AppDatabase extends RoomDatabase {
 //                .allowMainThreadQueries()
                 .build();
     }
+
+    public abstract NewsDao newsDao();
 }

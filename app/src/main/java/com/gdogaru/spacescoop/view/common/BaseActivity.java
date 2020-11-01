@@ -25,13 +25,20 @@ import com.squareup.otto.Bus;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasAndroidInjector;
+
 /**
  * @author Gabriel Dogaru (gdogaru@gmail.com)
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements HasAndroidInjector {
 
     @Inject
     protected Bus bus;
+
+    @Inject
+    DispatchingAndroidInjector<Object> dispatchingAndroidInjector;
 
     public boolean isLandscapeTablet() {
         return getResources().getBoolean(R.bool.isLandscapeTablet);
@@ -47,5 +54,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onPause() {
         bus.unregister(this);
         super.onPause();
+    }
+
+    @Override
+    public AndroidInjector<Object> androidInjector() {
+        return dispatchingAndroidInjector;
     }
 }

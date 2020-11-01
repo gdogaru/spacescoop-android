@@ -34,10 +34,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -47,6 +45,7 @@ import com.gdogaru.spacescoop.api.model.Language;
 import com.gdogaru.spacescoop.controllers.AppSettingsController;
 import com.gdogaru.spacescoop.controllers.ImageDownloader;
 import com.gdogaru.spacescoop.controllers.RatingController;
+import com.gdogaru.spacescoop.databinding.MainBinding;
 import com.gdogaru.spacescoop.view.SplashActivity;
 import com.gdogaru.spacescoop.view.article.ArticlesActivity;
 import com.gdogaru.spacescoop.view.common.BaseActivity;
@@ -63,10 +62,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class MainActivity extends BaseActivity implements ArticleDisplayer, NavigationView.OnNavigationItemSelectedListener {
+    public long itemId;
     @Inject
     AppSettingsController settingsController;
     @Inject
@@ -75,16 +72,7 @@ public class MainActivity extends BaseActivity implements ArticleDisplayer, Navi
     ViewModelFactory viewModelFactory;
     @Inject
     ImageDownloader imageDownloader;
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
-    @BindView(R.id.navigation)
-    NavigationView navigationView;
-
-
-    public long itemId;
+    private MainBinding binding;
     private ActionBarDrawerToggle drawerToggle;
     private MenuItem viewTypeToggle;
     private MainActivityViewModel viewmodel;
@@ -105,8 +93,8 @@ public class MainActivity extends BaseActivity implements ArticleDisplayer, Navi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main);
-        ButterKnife.bind(this);
+        binding = MainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         viewmodel = viewModelFactory.create(MainActivityViewModel.class);
         viewmodel.init();
@@ -115,16 +103,16 @@ public class MainActivity extends BaseActivity implements ArticleDisplayer, Navi
             itemId = getIntent().getLongExtra("itemId", 0);
         }
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle(R.string.unawe_title);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close);
         drawerToggle.setDrawerIndicatorEnabled(true);
-        drawerLayout.addDrawerListener(drawerToggle);
+        binding.drawerLayout.addDrawerListener(drawerToggle);
 
-        navigationView.setNavigationItemSelectedListener(this);
+        binding.navigation.setNavigationItemSelectedListener(this);
         openDrawerFirstTime();
 
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
@@ -146,7 +134,7 @@ public class MainActivity extends BaseActivity implements ArticleDisplayer, Navi
 
     private void openDrawerFirstTime() {
         if (!settingsController.seenDrawer()) {
-            drawerLayout.openDrawer(Gravity.LEFT);
+            binding.drawerLayout.openDrawer(Gravity.LEFT);
             settingsController.setSeenDrawer(true);
         }
     }
@@ -197,7 +185,7 @@ public class MainActivity extends BaseActivity implements ArticleDisplayer, Navi
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+        if (binding.drawerLayout.isDrawerOpen(Gravity.LEFT)) {
             closeDrawer();
         } else {
             super.onBackPressed();
@@ -254,7 +242,8 @@ public class MainActivity extends BaseActivity implements ArticleDisplayer, Navi
 
         viewmodel.getLanguages().observe(this, listApiResponse -> {
             loadingDialog.cancel();
-            showSelectLanguageDialog(listApiResponse.getValue());
+            List<Language> languages = listApiResponse.getValue();
+            if (languages != null && languages.size() > 0) showSelectLanguageDialog(languages);
         });
     }
 
@@ -280,8 +269,8 @@ public class MainActivity extends BaseActivity implements ArticleDisplayer, Navi
     }
 
     private void closeDrawer() {
-        if (drawerLayout != null) {
-            drawerLayout.closeDrawers();
+        if (binding.drawerLayout != null) {
+            binding.drawerLayout.closeDrawers();
         }
     }
 

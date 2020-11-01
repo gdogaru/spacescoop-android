@@ -33,22 +33,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArticlePreview implements HasId {
+    @ColumnInfo(name = "language")
+    String language;
     @PrimaryKey
     @ColumnInfo(name = "id")
     private long id;
-
     @ColumnInfo(name = "headImageUrl")
     private String headImageUrl;
-
     @ColumnInfo(name = "title")
     private String title;
-
     @ColumnInfo(name = "publishDate")
     private Date publishDate;
-
     @ColumnInfo(name = "previewText")
     private String previewText;
-
-    @ColumnInfo(name = "language")
-    String language;
 }

@@ -19,46 +19,41 @@
 package com.gdogaru.spacescoop.view.main.scoops.grid;
 
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gdogaru.spacescoop.R;
 import com.gdogaru.spacescoop.controllers.ImageDownloader;
+import com.gdogaru.spacescoop.databinding.MainScoopsGridItemBinding;
 import com.gdogaru.spacescoop.db.model.ArticleThumb;
 import com.gdogaru.spacescoop.view.main.scoops.ItemSelectedCallback;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ArticleThumbVH extends RecyclerView.ViewHolder {
-    @BindView(R.id.image)
-    ImageView imageView;
 
-    public ArticleThumbVH(@NonNull View itemView) {
-        super(itemView);
-        ButterKnife.bind(this, itemView);
+    private final MainScoopsGridItemBinding binding;
+
+    public ArticleThumbVH(MainScoopsGridItemBinding binding) {
+        super(binding.getRoot());
+        this.binding = binding;
     }
 
-    public static ArticleThumbVH create(LayoutInflater inflater, ViewGroup parent) {
-        return new ArticleThumbVH(inflater.inflate(R.layout.main_scoops_grid_item, parent, false));
+    public static ArticleThumbVH create(LayoutInflater inflater) {
+        return new ArticleThumbVH(MainScoopsGridItemBinding.inflate(inflater));
     }
 
     public void bind(ArticleThumb item, String lang, ImageDownloader imageDownloader, ItemSelectedCallback selectedCallback) {
         if (item == null) return;
 
         if (item.getHeadImageUrl() != null) {
-            imageDownloader.displayThumb(item.getHeadImageUrl(), imageView);
-            imageView.setContentDescription(imageView.getContext().getString(R.string.article_image_description, item.getTitle()));
+            imageDownloader.displayThumb(item.getHeadImageUrl(), binding.image);
+            binding.image.setContentDescription(binding.image.getContext().getString(R.string.article_image_description, item.getTitle()));
         } else {
-            imageView.setImageDrawable(null);
-            imageView.setContentDescription("");
+            binding.image.setImageDrawable(null);
+            binding.image.setContentDescription("");
         }
 
-        itemView.setOnClickListener(v -> selectedCallback.onItemSelected(item, imageView));
+        itemView.setOnClickListener(v -> selectedCallback.onItemSelected(item, binding.image));
     }
 }
 

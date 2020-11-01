@@ -34,6 +34,9 @@ import java.util.Locale;
  */
 @SuppressWarnings("PMD.AvoidThrowingCertainExceptionTypes")
 public class Preconditions {
+    private Preconditions() {
+    }
+
     public static void checkArgument(boolean expression) {
         if (!expression) {
             throw new IllegalArgumentException();
@@ -452,8 +455,5 @@ public class Preconditions {
         }
 
         return value;
-    }
-
-    private Preconditions() {
     }
 }

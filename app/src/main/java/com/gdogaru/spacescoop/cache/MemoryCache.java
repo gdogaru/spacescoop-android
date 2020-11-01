@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MemoryCache {
-    private Map<DownloadableImage, SoftReference<Bitmap>> cache = Collections.synchronizedMap(new HashMap<DownloadableImage, SoftReference<Bitmap>>());
+    private final Map<DownloadableImage, SoftReference<Bitmap>> cache = Collections.synchronizedMap(new HashMap<DownloadableImage, SoftReference<Bitmap>>());
 
     public Bitmap get(DownloadableImage img) {
         if (!cache.containsKey(img)) {

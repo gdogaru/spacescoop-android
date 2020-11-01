@@ -46,7 +46,7 @@ public class SpaceScoopApp extends Application implements HasAndroidInjector {
     DaggerWorkerFactory workerFactory;
 
     @Inject
-    DispatchingAndroidInjector<Object> DispatchingAndroidInjector;
+    DispatchingAndroidInjector<Object> dispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
@@ -72,7 +72,7 @@ public class SpaceScoopApp extends Application implements HasAndroidInjector {
 
     @Override
     public AndroidInjector<Object> androidInjector() {
-        return DispatchingAndroidInjector;
+        return dispatchingAndroidInjector;
     }
 
 }

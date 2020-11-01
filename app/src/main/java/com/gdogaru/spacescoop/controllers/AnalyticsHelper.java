@@ -38,6 +38,11 @@ public class AnalyticsHelper {
         this.firebaseAnalytics = firebaseAnalytics;
     }
 
+    @SuppressWarnings("ConstantConditions")
+    private static boolean isDevelopmentBuild() {
+        return BuildConfig.DEBUG || BuildConfig.FLAVOR.equals("dev");
+    }
+
     public void logEvent(Event event, long value) {
         if (isDevelopmentBuild()) return;
 
@@ -48,11 +53,6 @@ public class AnalyticsHelper {
         bundle.putString(FirebaseAnalytics.Param.VALUE, String.valueOf(value));
 
         firebaseAnalytics.logEvent(event.value, bundle);
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    private static boolean isDevelopmentBuild() {
-        return BuildConfig.DEBUG || BuildConfig.FLAVOR.equals("dev");
     }
 
     public void logTime(String event, long downTime) {

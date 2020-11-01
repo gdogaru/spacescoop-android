@@ -22,18 +22,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.gdogaru.spacescoop.R;
 import com.gdogaru.spacescoop.controllers.AppSettingsController;
 import com.gdogaru.spacescoop.controllers.ImageDownloader;
+import com.gdogaru.spacescoop.databinding.MainScoopsBinding;
 import com.gdogaru.spacescoop.view.common.BaseFragment;
 import com.gdogaru.spacescoop.view.di.ViewModelFactory;
 import com.gdogaru.spacescoop.view.main.ArticleDisplayer;
@@ -43,19 +42,9 @@ import com.gdogaru.spacescoop.view.main.scoops.list.ArticleListAdapter;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class ScoopsFragment extends BaseFragment implements HasTitle {
 
     public static final int GRID_COLUMNS = 3;
-
-    @BindView(R.id.swipe_refresh_layout)
-    SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.recycler)
-    RecyclerView recycler;
-    @BindView(R.id.bottom_progress)
-    ProgressBar bottomProgress;
 
     @Inject
     ImageDownloader imageDownloader;
@@ -72,6 +61,7 @@ public class ScoopsFragment extends BaseFragment implements HasTitle {
     private GridLayoutManager gridLayoutManager;
     private GridLayoutManager listLayoutManager;
     private RecyclerView.LayoutManager layoutManager;
+    private MainScoopsBinding binding;
 
     @Override
     public String getTitle() {
@@ -86,20 +76,20 @@ public class ScoopsFragment extends BaseFragment implements HasTitle {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_scoops, container, false);
+        binding = MainScoopsBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
 
         settingsController.isInListModeLiveData().observe(ScoopsFragment.this, this::changeLayout);
 
-        swipeRefreshLayout.setOnRefreshListener(() ->
+        binding.swipeRefreshLayout.setOnRefreshListener(() ->
                 viewModel.getNewScoops().observe(ScoopsFragment.this, staleState -> {
                     if (staleState.isEndState()) {
-                        swipeRefreshLayout.setRefreshing(false);
+                        binding.swipeRefreshLayout.setRefreshing(false);
                     }
                 }));
 
@@ -112,7 +102,7 @@ public class ScoopsFragment extends BaseFragment implements HasTitle {
         gridLayoutManager = new GridLayoutManager(activity, getResources().getInteger(R.integer.scoops_grid_columns));
         listLayoutManager = new GridLayoutManager(activity, getResources().getInteger(R.integer.scoops_list_columns));
 
-        viewModel.loadMoreActive().observe(this, loading -> bottomProgress.setVisibility(loading ? View.VISIBLE : View.GONE));
+        viewModel.loadMoreActive().observe(this, loading -> binding.bottomProgress.setVisibility(loading ? View.VISIBLE : View.GONE));
         initScrollLoader();
     }
 
@@ -125,12 +115,12 @@ public class ScoopsFragment extends BaseFragment implements HasTitle {
             adapter = mainGridAdapter;
             layoutManager = gridLayoutManager;
         }
-        recycler.setAdapter(adapter);
-        recycler.setLayoutManager(layoutManager);
+        binding.recycler.setAdapter(adapter);
+        binding.recycler.setLayoutManager(layoutManager);
     }
 
     private void initScrollLoader() {
-        recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        binding.recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);

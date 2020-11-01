@@ -25,19 +25,16 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 
 import com.gdogaru.spacescoop.R;
 import com.gdogaru.spacescoop.controllers.AnalyticsHelper;
 import com.gdogaru.spacescoop.controllers.ImageDownloader;
+import com.gdogaru.spacescoop.databinding.ArticleFullImageBinding;
 import com.gdogaru.spacescoop.view.common.BaseActivity;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author Gabriel Dogaru (gdogaru@gmail.com)
@@ -47,15 +44,11 @@ public class FullImageActivity extends BaseActivity {
     public static final String IMAGE_URI = "image_uri";
     public static final String IMAGE_TITLE = "image_title";
 
-    @BindView(R.id.image)
-    ImageView imageView;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
     @Inject
     ImageDownloader imageDownloader;
     @Inject
     AnalyticsHelper analyticsHelper;
+    private ArticleFullImageBinding binding;
 
     public static void start(Activity activity, String url, String title, ImageView fromView) {
         Intent intent = new Intent(activity, FullImageActivity.class);
@@ -68,15 +61,15 @@ public class FullImageActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.article_full_image);
-        ButterKnife.bind(this);
+        binding = ArticleFullImageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        imageDownloader.display(getIntent().getStringExtra(IMAGE_URI), imageView);
-        imageView.setContentDescription(getString(R.string.article_image_description, getIntent().getStringExtra(IMAGE_TITLE)));
+        imageDownloader.display(getIntent().getStringExtra(IMAGE_URI), binding.image);
+        binding.image.setContentDescription(getString(R.string.article_image_description, getIntent().getStringExtra(IMAGE_TITLE)));
         analyticsHelper.logEvent(AnalyticsHelper.Event.FULL_IMAGE_VIEW, 1);
     }
 

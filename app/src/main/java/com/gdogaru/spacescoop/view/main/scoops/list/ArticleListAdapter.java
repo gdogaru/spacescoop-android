@@ -49,7 +49,7 @@ public class ArticleListAdapter extends PagedListAdapter<ArticlePreview, Article
     @NonNull
     @Override
     public ArticlePreviewVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return ArticlePreviewVH.create(inflater, parent);
+        return ArticlePreviewVH.create(inflater);
     }
 
     @Override

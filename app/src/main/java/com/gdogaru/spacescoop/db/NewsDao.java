@@ -40,7 +40,7 @@ public interface NewsDao {
     @Query("SELECT id, headImageUrl, title, publishDate, previewText, language FROM articles where language=:lang and (title like :input or text like :input) order by publishDate desc")
     DataSource.Factory<Integer, ArticlePreview> newsSearchCursor(String input, String lang);
 
-    @Query("SELECT id, headImageUrl, language FROM articles where language=:lang order by publishDate desc")
+    @Query("SELECT id, title, headImageUrl, language FROM articles where language=:lang order by publishDate desc")
     DataSource.Factory<Integer, ArticleThumb> thumbsCursor(String lang);
 
     @Query("SELECT id, headImageUrl, title, publishDate, previewText, language FROM articles where language=:lang and title like :query  order by publishDate desc")

@@ -54,14 +54,14 @@ public class AppSettingsController {
         this.context = context.getApplicationContext();
     }
 
-    public void setLastUpdated(Date date) {
-        SharedPreferences sharedPreferences = getSharedPreferences();
-        sharedPreferences.edit().putLong(LAST_UPDATED, date.getTime()).apply();
-    }
-
     public Date getLastUpdated() {
         SharedPreferences sharedPreferences = getSharedPreferences();
         return new Date(sharedPreferences.getLong(LAST_UPDATED, 0));
+    }
+
+    public void setLastUpdated(Date date) {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        sharedPreferences.edit().putLong(LAST_UPDATED, date.getTime()).apply();
     }
 
     public String getLanguage() {
@@ -98,14 +98,14 @@ public class AppSettingsController {
         return context.getSharedPreferences(PREFS_NAME, 0);
     }
 
-    public void setEndReached(boolean b) {
-        SharedPreferences sharedPreferences = getSharedPreferences();
-        sharedPreferences.edit().putBoolean(END_REACHED, b).apply();
-    }
-
     public boolean isEndReached() {
         SharedPreferences sharedPreferences = getSharedPreferences();
         return sharedPreferences.getBoolean(END_REACHED, false);
+    }
+
+    public void setEndReached(boolean b) {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        sharedPreferences.edit().putBoolean(END_REACHED, b).apply();
     }
 
     public boolean seenDrawer() {
@@ -120,17 +120,17 @@ public class AppSettingsController {
                 .apply();
     }
 
+    @Nullable
+    public String getEndUpdateJobId() {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        return sharedPreferences.getString(END_UPDATE_JOB_ID, null);
+    }
+
     public void setEndUpdateJobId(String id) {
         getSharedPreferences()
                 .edit()
                 .putString(END_UPDATE_JOB_ID, id)
                 .apply();
-    }
-
-    @Nullable
-    public String getEndUpdateJobId() {
-        SharedPreferences sharedPreferences = getSharedPreferences();
-        return sharedPreferences.getString(END_UPDATE_JOB_ID, null);
     }
 
     public boolean getUpdateWifiOnly() {

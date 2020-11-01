@@ -54,8 +54,8 @@ import static com.gdogaru.spacescoop.view.main.scoops.ScoopsFragment.GRID_COLUMN
 public class CachingDownloader {
     private static final int MAX_RESOLUTION = 700 * 700;
     private final Context appContext;
-    private DiskAdapter diskAdapter;
-    private AnalyticsHelper analyticsHelper;
+    private final DiskAdapter diskAdapter;
+    private final AnalyticsHelper analyticsHelper;
     private double THUMBNAIL_WIDTH = 150;
     private double SCREEN_WIDTH = 720;
 
@@ -252,8 +252,8 @@ public class CachingDownloader {
 
     class DownloadImageCallable implements Callable<Bitmap> {
 
-        private DownloadableImage dimage;
-        private ImageSize size;
+        private final DownloadableImage dimage;
+        private final ImageSize size;
 
         DownloadImageCallable(DownloadableImage dimage, ImageSize size) {
             this.dimage = dimage;

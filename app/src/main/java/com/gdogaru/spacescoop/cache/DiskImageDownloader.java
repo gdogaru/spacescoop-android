@@ -37,10 +37,10 @@ import timber.log.Timber;
 @Singleton
 public class DiskImageDownloader implements ImageDownloader {
 
-    private CachingDownloader cachingDownloader;
-    private MemoryCache memoryCache = new MemoryCache();
-    private ExecutorService executorService;
-    private Handler uiHandler = new Handler(Looper.getMainLooper());
+    private final CachingDownloader cachingDownloader;
+    private final MemoryCache memoryCache = new MemoryCache();
+    private final ExecutorService executorService;
+    private final Handler uiHandler = new Handler(Looper.getMainLooper());
 
     @Inject
     public DiskImageDownloader(CachingDownloader cachingDownloader) {

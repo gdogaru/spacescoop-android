@@ -40,6 +40,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
 })
 public interface AppComponent {
 
+    void inject(SpaceScoopApp app);
+
     @Component.Builder
     interface Builder {
 
@@ -49,8 +51,6 @@ public interface AppComponent {
 
         AppComponent build();
     }
-
-    void inject(SpaceScoopApp app);
 
 //    void inject(UpdateErc20RatesWorker updateErc20RatesWorker);
 //

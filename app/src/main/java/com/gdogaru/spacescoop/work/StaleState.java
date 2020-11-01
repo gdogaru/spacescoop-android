@@ -26,7 +26,7 @@ public enum StaleState {
     SUCCESS(true),
     ERROR(true);
 
-    private boolean endState;
+    private final boolean endState;
 
     StaleState(boolean endState) {
         this.endState = endState;

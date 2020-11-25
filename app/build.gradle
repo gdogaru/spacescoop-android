@@ -120,7 +120,7 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "androidx.appcompat:appcompat:1.2.0"
     implementation "com.google.android.material:material:1.2.1"
-    implementation "androidx.constraintlayout:constraintlayout:2.0.3"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     implementation "androidx.navigation:navigation-fragment:2.3.1"
     implementation "androidx.navigation:navigation-ui:2.3.1"
     implementation "androidx.room:room-runtime:2.2.5"
@@ -130,15 +130,15 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
     implementation "com.google.firebase:firebase-core:18.0.0"
-    implementation 'com.google.firebase:firebase-perf:19.0.9'
-    implementation 'com.google.firebase:firebase-crashlytics:17.2.2'
+    implementation 'com.google.firebase:firebase-perf:19.0.10'
+    implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
     implementation 'com.google.firebase:firebase-analytics:18.0.0'
 
-    implementation "com.google.dagger:dagger:2.29.1"
-    implementation "com.google.dagger:dagger-android:2.29.1"
-    implementation "com.google.dagger:dagger-android-support:2.29.1"
-    annotationProcessor "com.google.dagger:dagger-compiler:2.29.1"
-    annotationProcessor "com.google.dagger:dagger-android-processor:2.29.1"
+    implementation "com.google.dagger:dagger:2.30"
+    implementation "com.google.dagger:dagger-android:2.30"
+    implementation "com.google.dagger:dagger-android-support:2.30"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.30"
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.30"
     compileOnly 'com.squareup.inject:assisted-inject-annotations-dagger2:0.6.0'
     annotationProcessor 'com.squareup.inject:assisted-inject-processor-dagger2:0.6.0'
 

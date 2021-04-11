@@ -105,6 +105,7 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_ID_MULTIPLE_PERMISSIONS) {
             List<String> notGranted = new ArrayList<>(permissionsNeeded);
             for (int i = 0; i < permissions.length; i++) {

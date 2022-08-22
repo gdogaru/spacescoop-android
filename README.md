@@ -21,7 +21,7 @@ From the UNAWE website:
 ## Contributing
  
  Please contact me directly to discuss any improvements before starting, I have not set up a process yet and we will discuss it together.
- You should me familiar with [gitflow](https://github.com/nvie/gitflow) as code versioning methodology.
+ You should be familiar with [gitflow](https://github.com/nvie/gitflow) as code versioning methodology.
  
  The code is left in Java and no data binding so that I can have a place to test and see what Java Android code looks like and test new frameworks.
  I would like it to be kept in Java for as long as it makes sense. 
